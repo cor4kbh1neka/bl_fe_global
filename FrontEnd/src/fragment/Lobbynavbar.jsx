@@ -6,7 +6,6 @@ import { Icon } from "@iconify/react";
 import Runningtext from "../fragment/Runningtext";
 import Mainmenu from "../component/Mainmenu";
 import { Logofirts } from "./Logofirts";
-import { Mtonce } from "./Mtonce";
 
 export const Lobbynavbar = ({ pageTitle }) => {
   const [username, setUsername] = useState("");
@@ -390,7 +389,6 @@ export const Lobbynavbar = ({ pageTitle }) => {
             </div>
           </div>
       </div>
-      <Mtonce />
     </>
   );
 };

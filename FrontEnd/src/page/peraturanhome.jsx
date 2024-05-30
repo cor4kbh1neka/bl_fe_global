@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Footer from "../component/Footer";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
-import { Mtonce } from "../fragment/Mtonce";
 
 const PeraturanPage = () => {
   const pProvideString = localStorage.getItem('halfPic');
@@ -61,7 +60,6 @@ const PeraturanPage = () => {
       </div>
       <Footer />
       <Livechat />
-      <Mtonce />
     </div>
   );
 };

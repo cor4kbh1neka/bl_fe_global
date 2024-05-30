@@ -6,7 +6,6 @@ import { Logindaftar } from "../fragment/Logindaftar";
 import Scroll from "../fragment/Scroll";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
-import { Mtonce } from "../fragment/Mtonce";
 
 const PromosihomePage = () => {
   const pProvideString = localStorage.getItem('halfPic');
@@ -39,7 +38,6 @@ const PromosihomePage = () => {
       <Scroll targetElementId="secpromosi" />
       <Footer />
       <Livechat />
-      <Mtonce />
     </div>
   );
 };

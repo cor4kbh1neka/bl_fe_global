@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import { MetaTags } from "../component/MetaTags";
 import { getProvide } from "../services/api.service";
 import { Livechat } from "../component/Livechat";
-import { Mtonce } from "../fragment/Mtonce";
 
 const LoginPage  = () =>  {
   const navigate = useNavigate();
@@ -86,7 +85,6 @@ const LoginPage  = () =>  {
           </div>
         )}
         <Livechat />
-        <Mtonce />
       </div>
   );
 }
