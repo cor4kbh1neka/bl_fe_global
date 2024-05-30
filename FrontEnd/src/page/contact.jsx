@@ -5,7 +5,6 @@ import Footer from "../component/Footer";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
 import { Kontakcc } from "../component/kontakcc";
-import { Mtonce } from "../fragment/Mtonce";
 
 const ContactPage = () => {
   const pProvideString = localStorage.getItem('halfPic');
@@ -46,7 +45,6 @@ const ContactPage = () => {
       </div>
       <Footer />
       <Livechat />
-      <Mtonce />
     </div>
   );
 };

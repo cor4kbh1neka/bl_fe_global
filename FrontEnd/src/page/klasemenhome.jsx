@@ -9,7 +9,6 @@ import {
 } from "../services/api.service";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
-import { Mtonce } from "../fragment/Mtonce";
 
 const TeamRow = ({
   position,
@@ -309,7 +308,6 @@ const KlasemenhomePage = () => {
       </div>
       <Footer />
       <Livechat />
-      <Mtonce />
     </div>
   );
 };

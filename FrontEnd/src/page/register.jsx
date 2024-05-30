@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import { login } from "../services/auth.service";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
-import { Mtonce } from "../fragment/Mtonce";
 
 const RegisterPage = () => {
   const pProvideString = localStorage.getItem('halfPic');
@@ -849,7 +848,6 @@ const RegisterPage = () => {
       </div>
       <Footer />
       <Livechat />
-      <Mtonce />
     </div>
   );
 };

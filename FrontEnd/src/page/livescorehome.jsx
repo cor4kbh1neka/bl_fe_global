@@ -13,7 +13,6 @@ import Scroll from "../fragment/Scroll";
 import { renderSkeleton } from "../fragment/Skeleton";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
-import { Mtonce } from "../fragment/Mtonce";
 
 export const LivescorehomePage = () => {
   const [showLiveMatches, setShowLiveMatches] = useState(false);
@@ -297,7 +296,6 @@ export const LivescorehomePage = () => {
       <Scroll targetElementId="seclivescore" />
       <Footer />
       <Livechat />
-      <Mtonce />
     </div>
   );
 };
