@@ -288,6 +288,7 @@ body {
   border-radius: 3px 3px 0 0;
   color: var(--white-color);
   text-transform: capitalize;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -376,6 +377,7 @@ body {
   background: var(--background-contact);
   color: var(--white-color);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .listcontact:hover {
@@ -765,6 +767,7 @@ body {
 
 .listpromosihome {
   width: 23%;
+  max-height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -779,9 +782,6 @@ body {
 .headpromosihome {
   width: 100%;
   height: 40px;
-  background: url(/assets/img/bg-promo-home.webp);
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -791,18 +791,27 @@ body {
 .imgpromosihome {
   width: 100%;
   position: absolute;
-  bottom: -22px;
-  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%);
+  top: 0;
+  border-radius: 4px 4px 0 0;
+  z-index: 0;
 }
 
 .textlistpromosihome {
   font-size: 12px;
   width: 100%;
   text-align: center;
-  z-index: 1;
-  padding: 10px 0;
+  padding: 0px 5px;
   text-shadow: 0 5px 8px #00000096;
   text-transform: uppercase;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.overtext {
+  overflow: hidden;
 }
 
 .listpromosihome .tombol {
@@ -826,6 +835,7 @@ body {
 .coingroup img {
   position: absolute;
   filter: drop-shadow(0 0 20px yellow);
+  z-index: 1;
 }
 
 .coin1 {
@@ -1147,6 +1157,7 @@ body {
   align-items: center;
   font-size: 9px;
   justify-content: center;
+  cursor: pointer;
 }
 
 .linklinkalternatif svg {
@@ -1346,6 +1357,11 @@ article td {
   gap: 5px;
   padding: 3px 0;
   border: 0.5px solid #f9f9f933;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.listcontactfooter:hover {
+  filter: contrast(2);
 }
 
 .listcontactfooter span {
@@ -1371,7 +1387,6 @@ article td {
 .listfooter {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 10px;
 }
 
@@ -1381,7 +1396,7 @@ article td {
 }
 
 .listfooter.kanan {
-  width: 35%;
+  width: 50%;
   align-items: flex-end;
 }
 
@@ -1389,19 +1404,25 @@ article td {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: flex-end;
   gap: 5px;
 }
-
+.listfooter.kiri .datafooter {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
 .listfooter.kanan .datafooter {
-  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .datafooter img {
-  width: 60px;
+  width: 50px;
   filter: grayscale(1) contrast(0.5);
   cursor: pointer;
   transition: all 0.3s ease;
+}
+.listfooter.kanan .datafooter img {
+  width: 70px;
 }
 
 .datafooter img:hover {
@@ -1422,7 +1443,7 @@ article td {
 }
 
 .listcopyright {
-  width: 50%;
+  width: 40%;
   display: flex;
   gap: 10px;
 }
@@ -1433,6 +1454,7 @@ article td {
 
 .listcopyright.kanan {
   justify-content: flex-end;
+  width: 60%;
 }
 
 .listcopyright a {
@@ -2172,6 +2194,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: do what you can;
 }
 .groupdatataruhan .listdatalive.skeleton {
   min-height: 150px;
@@ -2181,6 +2204,9 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 }
 .listdatalive.skeleton.register {
   min-height: 100dvh;
+}
+.listdatalive.skeleton.promosihomecc {
+  min-height: 270px;
 }
 
 .groupmatchteam {
@@ -3230,6 +3256,12 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   text-transform: capitalize;
   color: #ababab;
 }
+.listdatataruhan .pilihanbet {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 150px;
+}
 .namapertandingan,
 .datainvoice {
   font-size: 9px;
@@ -3277,6 +3309,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 
 .opsibet .oddsbet[data-value="running"],
 .datastatus[data-value="running"],
+.datastatus[data-value="Running"],
 .dddetailbetting .valuebet.subBet.status[data-statusbet="running"],
 .grouphasilpertandingan[data-status="running"] {
   color: var(--yellow-color);
@@ -4618,8 +4651,12 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   padding: 5px;
   border-radius: 5px;
 }
+.iconkontakcc.lc {
+  background: #f74e003b;
+  color: #f74e00;
+}
 .iconkontakcc.wa {
-  background: #2aff0780;
+  background: #2aff073b;
   color: #2aff07;
 }
 .iconkontakcc.tl {
@@ -4633,6 +4670,10 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 .iconkontakcc.sk {
   background: #00aff0;
   color: var(--white-soft-color);
+}
+.iconkontakcc.ln {
+  background: #06c0523b;
+  color: #06c052;
 }
 .datakontakcc {
   width: 75%;
@@ -5840,6 +5881,9 @@ input#tanggal::-webkit-calendar-picker-indicator {
 .bagtgl {
   width: 20%;
 }
+.baginvoicest {
+  width: 10%;
+}
 .bagnominal {
   width: 20%;
 }
@@ -5924,8 +5968,9 @@ input#tanggal::-webkit-calendar-picker-indicator {
 
 }
 .listheaddetail {
+  width: 75%;
   display: grid;
-  grid-template-columns: 0.5fr 0.05fr 1fr;
+  grid-template-columns: 0.7fr 0.05fr 1fr;
 }
 .listheaddetail .label {
   font-weight: bold;
@@ -5933,6 +5978,9 @@ input#tanggal::-webkit-calendar-picker-indicator {
 }
 .listheaddetail span {
   font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .listheaddetail span.stake {
   color: var(--aqua-color);
@@ -6214,7 +6262,238 @@ input#tanggal::-webkit-calendar-picker-indicator {
   font-size: 9px;
   color: #ababab;
 }
-
+.empty-message {
+  font-size: 12px;
+  padding: 20px 5px;
+}
+.sbobetopsi {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100dvh;
+  z-index: 99;
+}
+.sbobetopsi.show {
+  display: block;
+}
+.secsbobetopsi {
+  margin: auto;
+  position: relative;
+  width: 100%;
+  max-width: 425px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.76);
+}
+.sbobetopsi .cckomponenklik.grouplogodanhalaman {
+  
+}
+.sbobetopsi .cckomponenklik.grouplogodanhalaman img {
+  animation: popupme 0.5s;
+}
+.sbobetopsi .grouplistbuttonbet {
+  animation: popupme 0.5s;
+}
+.sbobetopsi .closeshowme {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 20px;
+  top: 25%;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 5px 5px 7px 5px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+.sbobetopsi .closeshowme:hover {
+  background: #3f3f3f;
+}
+@keyframes popupme {
+  0% {
+    transform: scale(0.3);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.secmaintenance {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(45deg, #232323b4 25%, #2a2929b4 25%, #2a2929b4 50%, #232323b4 50%, #232323b4 75%, #2a2929b4 75%, #2a2929b4);
+  background-size: 200px 200px;
+  animation: moveBackground 8s linear infinite;
+}
+.secmaintenance .gambarmt {
+  width: 100%;
+  opacity: 0.1;
+}
+.textmaintenance {
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  z-index: 1;
+}
+.datainvoicest {
+  width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.transaksicc[data-value="pemasangan"] {
+  color: var(--primary-color);
+}
+.transaksicc[data-value="cashout"],
+.transaksicc[data-value="rollback"],
+.transaksicc[data-value="cancel"] {
+  color: var(--primary-color);
+  animation: huesate 2s infinite linear;
+}
+.transaksicc[data-value="menang"],
+.transaksicc[data-value="deposit"],
+.transaksicc[data-value="referral"],
+.transaksicc[data-keterangan="cashback"],
+.transaksicc[data-keterangan="rollingan"],
+.transaksicc[data-keterangan="deposit"] {
+  color: var(--green-status-color);
+}
+.transaksicc[data-value="withdraw"],
+.transaksicc[data-keterangan="withdraw"] {
+  color: var(--red-status-color);
+}
+.keterangandana {
+  display: flex;
+  flex-direction: column;
+}
+.nominalakhir {
+  color: var(--green-status-color);
+}
+.nominalakhir[data-value="0"] {
+  color: var(--white-color);
+}
+.nominalakhir[data-value^="-"] {
+  color: var(--red-status-color);
+}
+.linkbet a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.linkbet a .textdetail {
+  display: block;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.seclivechat {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 99;
+}
+.referralkosong {
+  margin-top: 10px;
+  font-size: 12px;
+}
+.sslogin .titlesec {
+  margin-top: 100px;
+}
+.sslogin .seclogin {
+  display: flex;
+  flex-direction: column;
+}
+.sslogin .secformlogin,
+.sslogin .seccontact {
+  width: 100%;
+}
+.sslogin .listcontact {
+  justify-content: center;
+}
+.sslogin .listcontact span {
+  font-size: 15px;
+}
+.sslogin .seccontact {
+  min-height: 350px;
+  justify-content: flex-start;
+}
+.sslogin .groupcontact,
+.contactcc .groupcontact {
+  display: none;
+}
+.aboutmess h2,
+.aboutmess h3,
+.aboutmess h4,
+.aboutmess h5 {
+  width: 100%;
+  font-family: myHeavy;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(var(--primary-rgba), 0.2);
+  color: var(--white-soft-color);
+}
+.aboutmess h2 {
+  font-size: 18px;
+  margin-top: 20px;
+}
+.aboutmess strong,
+.aboutmess li {
+  font-size: 12px;
+  line-height: 18px;
+}
+.aboutmess h3 {
+  font-size: 14px;
+  margin-top: 20px;
+  border-bottom: none;
+}
+.contactcc .seccontact {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 10px;
+}
+.contactcc .listcontact {
+  gap: 10px;
+}
+.contactcc .aboutmess p {
+  margin-bottom: 10px;
+  font-size: 11px;
+}
+.kontenmt {
+  width: 90%;
+  margin: 0 auto 10px auto;
+  padding: 15px;
+  background: #232323cf url(/assets/img/global-maintenance.gif);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: color;
+  border-radius: 6px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.247);
+}
+.maintenance .secperaturan p {
+  font-size: 12px;
+}
 
 @media screen and (max-width: 1024px) {
   .titlesec h1 {
@@ -6250,11 +6529,13 @@ input#tanggal::-webkit-calendar-picker-indicator {
     font-size: 5vw;
   }
 
-  article h2 {
+  article h2,
+  .aboutmess h2 {
     font-size: 4.5vw;
   }
 
-  article h3 {
+  article h3,
+  .aboutmess h3 {
     font-size: 4vw;
   }
 
