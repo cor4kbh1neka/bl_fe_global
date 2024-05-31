@@ -18,8 +18,31 @@ export const LivescorehomePage = () => {
   const [showLiveMatches, setShowLiveMatches] = useState(false);
   const [combinedData, setCombinedData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const pProvideString = localStorage.getItem('halfPic');
-  const pProvide = pProvideString ? JSON.parse(pProvideString) : null;
+  const [dataProvide, setDataProvide] = useState([]);
+  const [error, setError] = useState(null);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const currentTime = new Date().getTime();
+        const storedTimestamp = localStorage.getItem('timestamp_timeHalf');
+        const storedData = localStorage.getItem('halfPic');
+
+        if (storedTimestamp && storedData && currentTime - storedTimestamp < 3600000) {
+          setDataProvide(JSON.parse(storedData));
+        } else {
+          const response = await getProvide();
+          setDataProvide(response.data);
+          localStorage.setItem('halfPic', JSON.stringify(response.data));
+          localStorage.setItem('timestamp_timeHalf', currentTime.toString());
+        }
+      } catch (error) {
+        setError("Failed to fetch data. Please try again later.");
+      } 
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async (isLive) => {
@@ -150,10 +173,10 @@ export const LivescorehomePage = () => {
 
   return (
     <div className="container">
-      {pProvide ? (
+      {dataProvide ? (
         <MetaTags
-          customTitle={`${pProvide.nmwebsite} | Informasi Live Score Terupdate`}
-          customDescription={`Informasi live score terupdate untuk sepak bola dan olahraga lainnya hanya di ${pProvide.nmwebsite}. Temukan peluang taruhan terbaik di situs kami!`}
+          customTitle={`${dataProvide.nmwebsite} | Informasi Live Score Terupdate`}
+          customDescription={`Informasi live score terupdate untuk sepak bola dan olahraga lainnya hanya di ${dataProvide.nmwebsite}. Temukan peluang taruhan terbaik di situs kami!`}
           customKeywords="Live Score Terupdate, skor langsung, sepak bola, olahraga, peluang taruhan, taruhan sepak bola, taruhan olahraga, update skor, live score bola, situs taruhan"
         />
       ) : (
@@ -167,7 +190,7 @@ export const LivescorehomePage = () => {
       <div className="seclivescore" id="seclivescore">
         <div className="titlesec">
           <h1>LIVE SCORE</h1>
-          <p>Cek Live Score Terkini di {pProvide.nmwebsite}</p>
+          <p>Cek Live Score Terkini di {dataProvide.nmwebsite}</p>
         </div>
         <Logindaftar />
         <div className="groupklivescore">

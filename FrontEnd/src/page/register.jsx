@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../fragment/Logo";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
@@ -10,8 +10,6 @@ import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
 
 const RegisterPage = () => {
-  const pProvideString = localStorage.getItem('halfPic');
-  const pProvide = pProvideString ? JSON.parse(pProvideString) : null;
   const [showPassword, setShowPassword] = useState(false);
   const { xreferral } = useParams();
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -41,6 +39,31 @@ const RegisterPage = () => {
   });
 
   const [showSkeleton, setShowSkeleton] = useState(false);
+  const [dataProvide, setDataProvide] = useState([]);
+  const [error, setError] = useState(null);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const currentTime = new Date().getTime();
+        const storedTimestamp = localStorage.getItem('timestamp_timeHalf');
+        const storedData = localStorage.getItem('halfPic');
+
+        if (storedTimestamp && storedData && currentTime - storedTimestamp < 3600000) {
+          setDataProvide(JSON.parse(storedData));
+        } else {
+          const response = await getProvide();
+          setDataProvide(response.data);
+          localStorage.setItem('halfPic', JSON.stringify(response.data));
+          localStorage.setItem('timestamp_timeHalf', currentTime.toString());
+        }
+      } catch (error) {
+        setError("Failed to fetch data. Please try again later.");
+      } 
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
@@ -588,10 +611,10 @@ const RegisterPage = () => {
 
   return (
     <div className="container">
-      {pProvide ? (
+      {dataProvide ? (
         <MetaTags
-          customTitle={`${pProvide.nmwebsite} | Daftar Akun Baru`}
-          customDescription={`Daftar akun baru di ${pProvide.nmwebsite}, situs judi bola terpercaya dan aman untuk taruhan online Anda. Nikmati pengalaman betting terbaik di sini!`}
+          customTitle={`${dataProvide.nmwebsite} | Daftar Akun Baru`}
+          customDescription={`Daftar akun baru di ${dataProvide.nmwebsite}, situs judi bola terpercaya dan aman untuk taruhan online Anda. Nikmati pengalaman betting terbaik di sini!`}
           customKeywords="daftar akun baru, judi bola, situs taruhan bola, betting bola, judi online terpercaya, taruhan sepak bola, website judi aman"
         />
       ) : (
@@ -606,7 +629,7 @@ const RegisterPage = () => {
       <div className="secregister">
         <div className="titlesec">
           <h1>DAFTAR</h1>
-          <p>Daftar Akun {pProvide.nmwebsite}</p>
+          <p>Daftar Akun {dataProvide.nmwebsite}</p>
         </div>
         <form onSubmit={handleSubmit} action="" id="daftar" name="daftar">
           <div className="dataakun">

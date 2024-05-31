@@ -3,22 +3,27 @@ import { Link } from "react-router-dom";
 import { getProvide } from "../services/api.service";
 
 const Logo = () => {
-  const [dataProvide, setDataProvide] = useState(null);
-
+  const [dataProvide, setDataProvide] = useState([]);
+  const [error, setError] = useState(null);
+  
   useEffect(() => {
     const fetchData = async () => {
-      const currentTime = new Date().getTime();
-      const storedTimestamp = localStorage.getItem('timestamp_timeHalf');
-      const storedData = localStorage.getItem('halfPic');
+      try {
+        const currentTime = new Date().getTime();
+        const storedTimestamp = localStorage.getItem('timestamp_timeHalf');
+        const storedData = localStorage.getItem('halfPic');
 
-      if (storedTimestamp && storedData && currentTime - storedTimestamp < 3600000) {
-        setDataProvide(JSON.parse(storedData));
-      } else {
-        const response = await getProvide();
-        setDataProvide(response.data);
-        localStorage.setItem('halfPic', JSON.stringify(response.data));
-        localStorage.setItem('timestamp_timeHalf', currentTime.toString());
-      }
+        if (storedTimestamp && storedData && currentTime - storedTimestamp < 3600000) {
+          setDataProvide(JSON.parse(storedData));
+        } else {
+          const response = await getProvide();
+          setDataProvide(response.data);
+          localStorage.setItem('halfPic', JSON.stringify(response.data));
+          localStorage.setItem('timestamp_timeHalf', currentTime.toString());
+        }
+      } catch (error) {
+        setError("Failed to fetch data. Please try again later.");
+      } 
     };
 
     fetchData();
@@ -33,6 +38,10 @@ const Logo = () => {
             className="logo"
             src={`/assets/img/${dataProvide.logrl}`}
             alt={`logo ${dataProvide.nmwebsite}`}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/assets/img/logo-dummy.webp";
+            }}
           />
         )}
       </Link>

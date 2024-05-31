@@ -26,8 +26,12 @@ export const Logofirts = () => {
   return (
     <>
         <img
-            src={`/assets/img/${dataProvide.logrl || 'team.webp'}`}
+            src={`/assets/img/${dataProvide.logrl}`}
             alt={`logo ${dataProvide.nmwebsite || 'our website'}`}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/assets/img/logo-dummy.webp";
+            }}
         />
     </>
   )

@@ -298,11 +298,20 @@ export const Lobbynavbar = ({ pageTitle }) => {
                   >
                     parlay
                   </div>
-                  <Link to="/sbobetdekstop"
-                    className="listnavigasi sbobetmode dekstop"
-                  >
+                  {windowWidth < 730 ? (
+                    <span
+                      className="listnavigasi sbobetmode dekstop"
+                      onClick={handleParlayClick}
+                    >
                     dekstop
-                  </Link>
+                    </span>
+                  ) : (
+                    <Link to="/sbobetdekstop"
+                      className="listnavigasi sbobetmode dekstop"
+                    >
+                      dekstop
+                    </Link>
+                  )}
                   <Link to="/sbobetmobile" className="listnavigasi sbobetmode mobile">
                       <span>Mobile Version</span>
                   </Link>

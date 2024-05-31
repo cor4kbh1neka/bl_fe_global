@@ -2,28 +2,36 @@ import React, { useEffect, useState } from 'react';
 import { getMeta } from '../services/api.service';
 
 export const MetaTags = ({ customTitle, customDescription, customKeywords }) => {
-    const [dataMetaTag, setDataMetaTag] = useState(null);
+    const [metaData, setMetaData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getMeta();
+      setMetaData(data.data);
+      localStorage.setItem('dataMetas', JSON.stringify(data.data));
+      localStorage.setItem('timeMetas', Date.now().toString());
+    };
+
+    const loadData = async () => {
+      const storedData = localStorage.getItem('dataMetas');
+      const storedTime = localStorage.getItem('timeMetas');
+      if (!storedData || !storedTime || Date.now() - parseInt(storedTime) > 1800000) {
+        await fetchData();
+      } else {
+        setMetaData(JSON.parse(storedData));
+      }
+    };
+
+    loadData();
+  }, []);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getMeta();
-                setDataMetaTag(data.data);
-            } catch (error) {
-                console.error('Error fetching meta data:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        if (dataMetaTag && dataMetaTag.mttag) {
+        if (metaData && metaData.mttag) {
             const oldMetaTags = document.querySelectorAll('meta[data-dynamic-meta], title[data-dynamic-title], link[data-dynamic-link]');
             oldMetaTags.forEach(tag => tag.remove());
 
             const metaContainer = document.createElement('div');
-            metaContainer.innerHTML = dataMetaTag.mttag;
+            metaContainer.innerHTML = metaData.mttag;
 
             Array.from(metaContainer.children).forEach(child => {
                 if (child.tagName.toLowerCase() === 'meta') {
@@ -59,7 +67,7 @@ export const MetaTags = ({ customTitle, customDescription, customKeywords }) => 
                 }
             });
         }
-    }, [dataMetaTag, customTitle, customDescription, customKeywords]);
+    }, [metaData, customTitle, customDescription, customKeywords]);
 
     return null;
 };

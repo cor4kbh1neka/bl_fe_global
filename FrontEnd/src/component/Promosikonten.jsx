@@ -34,6 +34,8 @@ export const Promosikonten = () => {
     <div className="grouppromosi">
       {loading ? (
         renderSkeleton()
+      ) : dataPromosi.length === 0 ? (
+        <div className="no-promosi">Promo Belum Ada</div>
       ) : (
         dataPromosi.map((promo, index) => (
           <div
@@ -46,6 +48,10 @@ export const Promosikonten = () => {
                 className="imgutamapromo"
                 src={promo.ctprmur}
                 alt={`Gambar ${promo.ttlectprm}`}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/assets/img/promo-dummy.webp";
+                }}
               />
               {[1, 2, 3].map((_, i) => (
                 <img
