@@ -6,7 +6,7 @@ const getSitemap = async () => {
         credentials: "omit",
         headers: {
           'Content-Type': 'application/json',
-          'x-customblhdrs' : '09c90c1d6e1b82015737f88d5f5b827060a57c874babe97f965aaa68072585191ce0eab75404312f4f349ee70029404c2d8f66698b6a4da18990445d1437ff79'
+          'x-customblhdrs' : 'bd2210a7c0e0a6ebf2de4416b41a9c2cee8920a274a976c24b96d6c16b51f0773fa3e4cbe90754e2958a54c96f404cc78040e2b0131c2efd5137effaffa1142b'
         },
       },
     );
