@@ -121,6 +121,10 @@ const Promosi = () => {
                         src={promo.ctprmur}
                         alt={promo.ttlectprm}
                         className="imgpromosihome"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "/assets/img/promo-dummy.webp";
+                        }}
                       />
                     </div>
                     <div className="overtext">
