@@ -32,6 +32,7 @@ import MaintenancePage from "./page/maintenance.jsx";
 import LoginoncePage from "./page/loginpage.jsx";
 import AboutPage from "./page/aboutus.jsx";
 import ContactPage from "./page/contact.jsx";
+import "./index.css";
 
 const router = createBrowserRouter([
   {

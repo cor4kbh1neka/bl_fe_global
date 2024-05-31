@@ -9,9 +9,21 @@ const Article = () => {
     const fetchData = async () => {
       const data = await getMeta();
       setMetaData(data.data);
+      localStorage.setItem('dataMetas', JSON.stringify(data.data));
+      localStorage.setItem('timeMetas', Date.now().toString());
     };
 
-    fetchData();
+    const loadData = async () => {
+      const storedData = localStorage.getItem('dataMetas');
+      const storedTime = localStorage.getItem('timeMetas');
+      if (!storedData || !storedTime || Date.now() - parseInt(storedTime) > 1800000) {
+        await fetchData();
+      } else {
+        setMetaData(JSON.parse(storedData));
+      }
+    };
+
+    loadData();
   }, []);
 
   const handleShowArticleClick = () => {

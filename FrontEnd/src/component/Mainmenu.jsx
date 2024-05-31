@@ -494,7 +494,7 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
         <div className="secsbobetopsi">
           <div className="cckomponenklik grouplogodanhalaman">
             <span className="closeshowme" onClick={handleShowOptions}>x</span>
-              <img src="/assets/img/global-bola-logo.webp" alt="global bola logo" />
+              <Logofirts />
               <div className="grouplistbuttonbet">
                 {windowWidth < 730 ? (
                   <div className="groupbuttonbet listnavigasi parlay" onClick={handlePyClick}>

@@ -55,8 +55,31 @@ const KlasemenhomePage = () => {
   const [loading, setLoading] = useState(true);
   const [fetchedData, setFetchedData] = useState(null);
 
-  const pProvideString = localStorage.getItem('halfPic');
-  const pProvide = pProvideString ? JSON.parse(pProvideString) : null;
+  const [dataProvide, setDataProvide] = useState([]);
+  const [error, setError] = useState(null);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const currentTime = new Date().getTime();
+        const storedTimestamp = localStorage.getItem('timestamp_timeHalf');
+        const storedData = localStorage.getItem('halfPic');
+
+        if (storedTimestamp && storedData && currentTime - storedTimestamp < 3600000) {
+          setDataProvide(JSON.parse(storedData));
+        } else {
+          const response = await getProvide();
+          setDataProvide(response.data);
+          localStorage.setItem('halfPic', JSON.stringify(response.data));
+          localStorage.setItem('timestamp_timeHalf', currentTime.toString());
+        }
+      } catch (error) {
+        setError("Failed to fetch data. Please try again later.");
+      } 
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchInitialLeagueData = async () => {
@@ -212,10 +235,10 @@ const KlasemenhomePage = () => {
 
   return (
     <div className="container">
-      {pProvide ? (
+      {dataProvide ? (
         <MetaTags
-          customTitle={`${pProvide.nmwebsite} | Informasi Klasemen Liga Terupdate`}
-          customDescription={`Dapatkan informasi klasemen liga terupdate tentang posisi tim favorit Anda di ${pProvide.nmwebsite} yaitu website taruhan sepak bola dan olahraga terpercaya.`}
+          customTitle={`${dataProvide.nmwebsite} | Informasi Klasemen Liga Terupdate`}
+          customDescription={`Dapatkan informasi klasemen liga terupdate tentang posisi tim favorit Anda di ${dataProvide.nmwebsite} yaitu website taruhan sepak bola dan olahraga terpercaya.`}
           customKeywords="Klasemen Liga Terbaru, Update Klasemen Liga, Posisi Tim Sepak Bola, Taruhan Sepak Bola, Website Taruhan Olahraga, Update Sepak Bola Terbaru, Taruhan Sepak Bola Terpercaya, Posisi Tim Favorit, Info Klasemen Liga, Website Olahraga Terpercaya"
         />
       ) : (
@@ -229,7 +252,7 @@ const KlasemenhomePage = () => {
       <div className="secklasemen">
         <div className="titlesec">
           <h1>KLASEMEN</h1>
-          <p>Cek Klasemen Liga di {pProvide.nmwebsite}</p>
+          <p>Cek Klasemen Liga di {dataProvide.nmwebsite}</p>
         </div>
         <Logindaftar />
         <div className="groupklasemen">

@@ -5,8 +5,31 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [currentUrl, setCurrentUrl] = useState("");
-  const pProvideString = localStorage.getItem('halfPic');
-  const pProvide = pProvideString ? JSON.parse(pProvideString) : null;
+  const [dataProvide, setDataProvide] = useState([]);
+  const [error, setError] = useState(null);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const currentTime = new Date().getTime();
+        const storedTimestamp = localStorage.getItem('timestamp_timeHalf');
+        const storedData = localStorage.getItem('halfPic');
+
+        if (storedTimestamp && storedData && currentTime - storedTimestamp < 3600000) {
+          setDataProvide(JSON.parse(storedData));
+        } else {
+          const response = await getProvide();
+          setDataProvide(response.data);
+          localStorage.setItem('halfPic', JSON.stringify(response.data));
+          localStorage.setItem('timestamp_timeHalf', currentTime.toString());
+        }
+      } catch (error) {
+        setError("Failed to fetch data. Please try again later.");
+      } 
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -68,7 +91,7 @@ const Footer = () => {
         </div>
         <div className="listcopyright kanan">
           <span>
-            Copyright © <a href={currentUrl}>{pProvide ? pProvide.nmwebsite : "bola"}</a>. All rights reserved.
+            Copyright © <a href={currentUrl}>{dataProvide ? dataProvide.nmwebsite : "bola"}</a>. All rights reserved.
           </span>
         </div>
       </div>

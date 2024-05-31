@@ -7,43 +7,43 @@ export default defineConfig({
   server: {
     proxy: {
       "/users": {
-        target: "https://bh1-n3-ka.situscepat.net",
+        target: "https://back-staging.bosraka.com",
         changeOrigin: true,
         secure: false,
         credentials: "omit",
       },
       "/authentications": {
-        target: "https://bh1-n3-ka.situscepat.net",
+        target: "https://back-staging.bosraka.com",
         changeOrigin: true,
         secure: false,
         credentials: "omit",
       },
       "/api": {
-        target: "https://bh1-n3-ka.situscepat.net",
+        target: "https://back-staging.bosraka.com",
         changeOrigin: true,
         secure: false,
         credentials: "omit",
       },
       "/prx": {
-        target: "https://bh1-n3-ka.situscepat.net",
+        target: "https://back-staging.bosraka.com",
         changeOrigin: true,
         secure: false,
         credentials: "omit",
       },
       "/memo": {
-        target: "https://bh1-n3-ka.situscepat.net",
+        target: "https://back-staging.bosraka.com",
         changeOrigin: true,
         secure: false,
         credentials: "omit",
       },
       "/banks": {
-        target: "https://bh1-n3-ka.situscepat.net",
+        target: "https://back-staging.bosraka.com",
         changeOrigin: true,
         secure: false,
         credentials: "omit",
       },
       "/content": {
-        target: "https://bh1-n3-ka.situscepat.net",
+        target: "https://back-staging.bosraka.com",
         changeOrigin: true,
         secure: false,
         credentials: "omit",

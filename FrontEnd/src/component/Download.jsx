@@ -48,6 +48,10 @@ const Download = () => {
             <img
               src={`/assets/img/${dataProvide.nmwebsite}-aplikasi.webp`}
               alt={`aplikasi ${dataProvide.nmwebsite}`}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/assets/img/aplikasi.webp";
+              }}
               className="downloadimg"
             />
             <div className="groupdownloaddown">

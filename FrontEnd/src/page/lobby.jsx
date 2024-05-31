@@ -330,6 +330,10 @@ export const LobbyPage = () => {
                 key={image.idctsldr}
                 src={image.ctsldrur}
                 alt={`banner-${image.idctsldr}`}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/assets/img/slider-dummy.webp";
+                }}
                 className={
                   index === currentImageIndex
                     ? "carbanner active"
