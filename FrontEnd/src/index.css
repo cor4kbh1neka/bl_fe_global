@@ -799,6 +799,7 @@
   .textlistpromosihome {
     font-size: 12px;
     width: 100%;
+    min-height: 30px;
     text-align: center;
     padding: 0px 5px;
     text-shadow: 0 5px 8px #00000096;
