@@ -45,7 +45,11 @@ const Promosi = () => {
                   <div className="headsecpromosi" key={index}>
                     <img 
                       src={promo.pssprm === "1" ? promo.ctprmur : "/assets/img/promo-dummy.webp"} 
-                      alt={promo.ttlectprm} 
+                      alt={promo.ttlectprm}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/assets/img/promo-dummy.webp";
+                      }}
                     />
                     <div className="buttonselengkapnya">
                       <Link to="/promosihome" className="tombol full primary">
@@ -71,7 +75,11 @@ const Promosi = () => {
                   <div className="headsecpromosi" key={index}>
                     <img 
                       src={promo.pssprm === "2" ? promo.ctprmur : "/assets/img/promo-dummy.webp"} 
-                      alt={promo.ttlectprm} 
+                      alt={promo.ttlectprm}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/assets/img/promo-dummy.webp";
+                      }}
                     />
                     <div className="buttonselengkapnya">
                       <Link to="/promosihome" className="tombol full primary">
@@ -113,6 +121,10 @@ const Promosi = () => {
                         src={promo.ctprmur}
                         alt={promo.ttlectprm}
                         className="imgpromosihome"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "/assets/img/promo-dummy.webp";
+                        }}
                       />
                     </div>
                     <div className="overtext">
