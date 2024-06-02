@@ -9,10 +9,13 @@ import { login } from "../services/auth.service";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
 import { getProvide } from "../services/api.service";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const { xreferral } = useParams();
+  const [referral, setReferral] = useState(xreferral || "");
+  const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [inputMessages, setInputMessages] = useState({
@@ -65,6 +68,57 @@ const RegisterPage = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setReferral(xreferral || "");
+  }, [xreferral]);
+
+  useEffect(() => {
+    const checkReferral = async () => {
+      if (xreferral) {
+        try {
+          const response = await fetch("/prx/cekuserreferral", {
+            method: "POST",
+            credentials: "omit",
+            headers: {
+              "Content-Type": "application/json",
+              utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
+              "x-customblhdrs": import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN,
+            },
+            body: JSON.stringify({ username: xreferral }),
+          });
+
+          const text = await response.text();
+          console.log("Raw response:", text);
+
+          let data;
+          try {
+            data = JSON.parse(text);
+          } catch (error) {
+            console.error("Error parsing JSON:", error);
+            return;
+          }
+
+          if (data.message === "Referral tidak ditemukan") {
+            setReferral("");
+
+            Swal.fire({
+              title: "Opps!",
+              text: "Referral tidak ditemukan",
+              icon: "info",
+              confirmButtonText: "OK",
+            }).then(() => {
+              navigate("/register");
+            });
+          }
+        } catch (error) {
+          console.error("Error checking referral:", error);
+        }
+      }
+    };
+
+    checkReferral();
+  }, [xreferral, navigate]);
 
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
@@ -764,7 +818,8 @@ const RegisterPage = () => {
                   name="referral"
                   placeholder=""
                   autoComplete="off"
-                  value={xreferral}
+                  value={referral}
+                  onChange={(e) => setReferral(e.target.value)}
                   readOnly
                 />
               </div>
