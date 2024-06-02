@@ -5,6 +5,7 @@ import Footer from "../component/Footer";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
 import { Kontakcc } from "../component/kontakcc";
+import { getProvide } from "../services/api.service";
 
 const ContactPage = () => {
   const [dataProvide, setDataProvide] = useState([]);

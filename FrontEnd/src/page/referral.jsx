@@ -23,7 +23,6 @@ export const ReferralPage = () => {
       setUsername(username);
       getReferral(username, access)
         .then((response) => {
-          console.log("Referral data response:", response);
           setReferralData(response || { dataReferral: [], dataKomisi: [] });
           setLoading(false);
         })
@@ -169,9 +168,6 @@ export const ReferralPage = () => {
                 />
               </div>
             </div>
-            <span className="linkreffklikcount">
-              link referral kamu telah di klik sebanyak 2036x
-            </span>
           </div>
           <div className="groupdatarefferal">
             <div className="listdatarefferal reff">

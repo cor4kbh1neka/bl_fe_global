@@ -7,6 +7,7 @@ import {
   fetchDataIslive,
   fetchDataIncoming,
   dataCompetition,
+  getProvide,
 } from "../services/api.service";
 import Swal from "sweetalert2";
 import Scroll from "../fragment/Scroll";

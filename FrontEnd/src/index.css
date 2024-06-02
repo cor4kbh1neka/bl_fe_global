@@ -309,6 +309,7 @@
   }
   
   .secruntext {
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 5px 0;
@@ -6533,6 +6534,15 @@
   .promolengkap {
       font-size: 15px;
       line-height: 20px;
+  }
+  .dekstop .secsbobetopsi {
+    position: absolute;
+    max-width: 75%;
+    left: unset;
+    right: 0;
+  }
+  .dekstop .closeshowme {
+    right: 30%;
   }
   
   @media screen and (max-width: 425px) {
