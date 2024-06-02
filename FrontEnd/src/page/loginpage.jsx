@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../fragment/Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../component/Footer";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
 import Secloginonce from "../component/Secloginonce";
+import { getUsername } from "../services/auth.service";
 
 const LoginoncePage = () => {
   const [dataProvide, setDataProvide] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const username = getUsername(token);
+      if (username) {
+        navigate("/lobby");
+      } else {
+        console.error("Invalid token");
+      }
+    }
+
+  }, [navigate]);
   
   useEffect(() => {
     const fetchData = async () => {
