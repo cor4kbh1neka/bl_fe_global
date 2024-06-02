@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Footer from "../component/Footer";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
+import { getProvide } from "../services/api.service";
 
 const AboutPage = () => {
   const [dataProvide, setDataProvide] = useState([]);

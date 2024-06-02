@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { login } from "../services/auth.service";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
+import { getProvide } from "../services/api.service";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);

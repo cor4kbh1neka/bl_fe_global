@@ -6,6 +6,7 @@ import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
 import Secloginonce from "../component/Secloginonce";
 import { getUsername } from "../services/auth.service";
+import { getProvide } from "../services/api.service";
 
 const LoginoncePage = () => {
   const [dataProvide, setDataProvide] = useState([]);

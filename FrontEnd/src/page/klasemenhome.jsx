@@ -6,6 +6,7 @@ import {
   fetchDataLiga,
   dataLeague,
   fetchKlasemenLiga,
+  getProvide,
 } from "../services/api.service";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";

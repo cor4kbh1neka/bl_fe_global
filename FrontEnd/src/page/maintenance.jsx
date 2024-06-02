@@ -3,6 +3,7 @@ import Logo from "../fragment/Logo";
 import Footer from "../component/Footer";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
+import { getProvide } from "../services/api.service";
 
 const MaintenancePage = () => {
   const [dataProvide, setDataProvide] = useState([]);
