@@ -32,6 +32,10 @@ export const HistorybetdekstopdetailPage = () => {
     return formattedDate;
   };
 
+  const isOrderTimePastKickOff = (orderTime, kickOffTime) => {
+    return new Date(orderTime) > new Date(kickOffTime);
+  };
+
   return (
     <div className="container historybetdekstop">
       <Lobbynavbar pageTitle="detail bet" />
@@ -106,6 +110,16 @@ export const HistorybetdekstopdetailPage = () => {
                                         <div className="listscore">
                                             <span className="labelscore">FT</span>
                                             <span className="valuescore subBet-ftScore">{item.ftScore}</span>
+                                        </div>
+                                    </div>
+                                    <div className="kickofftime">
+                                        <div className="listkickoff">
+                                            <span className="labelbolajalan">Kickoff Time :</span>
+                                            <span className="statusbolajalan">{formatOrderTime(item.kickOffTime)}</span>
+                                        </div>
+                                        <div className="listkickoff">
+                                            <span className="labelbolajalan">Bola jalan :</span>
+                                            <span className="statusbolajalan hasil" data-value={isOrderTimePastKickOff(detailBet?.orderTime, item.kickOffTime) ? 'true' : 'false'}>{isOrderTimePastKickOff(detailBet?.orderTime, item.kickOffTime) ? 'true' : 'false'}</span>
                                         </div>
                                     </div>
                                     <span className="detailbetting">detail bet : <span className={`htft ${item.isHalfWonLose ? 'isHalfWonLose' : ''}`}>{item.isHalfWonLose ? 'HALF TIME' : 'FULL TIME'}</span></span>
