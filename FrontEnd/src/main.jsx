@@ -33,6 +33,7 @@ import LoginoncePage from "./page/loginpage.jsx";
 import AboutPage from "./page/aboutus.jsx";
 import ContactPage from "./page/contact.jsx";
 import "./index.css";
+import ReferralLobbyPage from "./page/referrallobby.jsx";
 
 const router = createBrowserRouter([
   {
@@ -128,6 +129,11 @@ const router = createBrowserRouter([
   {
     path: "/referral",
     element: <ReferralPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/referral/:xreferral",
+    element: <ReferralLobbyPage />,
     errorElement: <ErrorPage />,
   },
   {
