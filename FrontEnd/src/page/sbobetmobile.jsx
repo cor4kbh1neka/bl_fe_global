@@ -54,7 +54,7 @@ export const SbobetmobilePage = () => {
             if (response.ok) {
               const data = await response.json();
             
-              if (data.is_suspend === true || data.is_maintenance === true) {
+              if (data.is_suspend === true) {
                 Swal.fire({
                   icon: "info",
                   title: "Akun Blokir",
