@@ -6565,6 +6565,25 @@
   .statusbolajalan.hasil[data-value="false"] {
     color: var(--red-color-value);
   }
+  /* update */
+  .isireff {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .isireff .tombol {
+    width: 100%;
+  }
+  .daftarddref .secregister {
+    margin-top: 20px;
+  }
+  .daftarkanreff .tombol.full {
+    background: #07a6ff;
+  }
+  .daftarkanreff .tombol.full:hover {
+    background: transparent;
+    border: 1px solid #07a6ff;
+  }
   
   @media screen and (max-width: 425px) {
     *::-webkit-scrollbar {

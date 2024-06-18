@@ -6,6 +6,7 @@ import { getReferral, getUsername } from "../services/auth.service";
 import Swal from "sweetalert2";
 import { renderSkeleton } from "../fragment/Skeleton";
 import Livechat from "../component/Livechat";
+import { Link } from "react-router-dom";
 
 export const ReferralPage = () => {
   const [username, setUsername] = useState("");
@@ -168,6 +169,9 @@ export const ReferralPage = () => {
                 />
               </div>
             </div>
+          </div>
+          <div className="daftarkanreff">
+            <Link to={`/referral/${username}`} className="tombol full">Daftarkan Referral</Link>
           </div>
           <div className="groupdatarefferal">
             <div className="listdatarefferal reff">

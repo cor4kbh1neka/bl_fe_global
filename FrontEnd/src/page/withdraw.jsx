@@ -89,9 +89,15 @@ export const WithdrawPage = () => {
   
           if (response.ok) {
             const data = await response.json();
-            if (data.status === "Waitting") {
+            if (data.status === "Waiting") {
               setShowTransaksiDiproses(true);
-              setInitialStatus("Waitting");
+              setInitialStatus("Waiting");
+            } else if (data.status === "Fail" && data.is_suspend === true) {
+              setShowTransaksiDiproses(true);
+              setInitialStatus("Suspend");
+            } else if (data.status === "Fail" && data.is_maintenance === true) {
+              setShowTransaksiDiproses(true);
+              setInitialStatus("Maintenance");
             } else if (data.status === "Fail") {
               setShowTransaksiDiproses(false);
               setIsConfirmDepositVisible(true);
@@ -493,6 +499,8 @@ export const WithdrawPage = () => {
           icon: "success",
           title: "Withdrawal Diproses",
           text: "Terima kasih, Dana anda sedang dalam proses."
+        }).then(() => {
+          window.location.reload();
         });
         setReloadNavbar(true);
         updateBalance();
@@ -551,10 +559,12 @@ export const WithdrawPage = () => {
                 </div>
               </div>
             </div>
-            {showTransaksiDiproses ? (
+            {showTransaksiDiproses && initialStatus === "Waiting" ? (
               <div className="transaksidiproses">
                 <span className="diproses">Withdraw dalam proses</span>
-                <span className="textdiproses">Permintaan penarikan sudah diterima oleh kami. Dana akan diproses paling lambat dalam waktu 1x24 jam. Rata-rata waktu proses penarikan adalah 2 menit per transaksi.</span>
+                <span className="textdiproses">
+                  Permintaan penarikan sudah diterima oleh kami. Dana akan diproses paling lambat dalam waktu 1x24 jam. Rata-rata waktu proses penarikan adalah 2 menit per transaksi.
+                </span>
                 <div className="groupbtnadmin">
                   <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
                     <Icon icon="cib:whatsapp" />
@@ -567,70 +577,100 @@ export const WithdrawPage = () => {
                 </div>
               </div>
             ) : (
-            <form
-              className={`formwithdraw ${isConfirmDepositVisible ? '' : 'hidden'}`}
-            >
-              <div className="groupfillnominal">
-                {nominalValues.map((value, index) => (
-                  <div
-                    className="listfillnominal"
-                    key={index}
-                    onClick={() => handleNominalClick(value)}
-                  >
-                    <span className="valuenominal">{value}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="groupnominaldeposit">
-                <label htmlFor="nominalwithdraw">Nominal Withdraw</label>
-                <div className="inputform">
-                  <input
-                    type="number"
-                    id="nominalwithdraw"
-                    name="nominalwithdraw"
-                    autoComplete="off"
-                    placeholder="Silahkan isi nominal withdraw"
-                    value={nominalWithdraw}
-                    onChange={(e) => setNominalWithdraw(e.target.value)}
-                    onBlur={handleNominalwd}
-                  />
+              <form className={`formwithdraw ${isConfirmDepositVisible ? '' : 'hidden'}`}>
+                <div className="groupfillnominal">
+                  {nominalValues.map((value, index) => (
+                    <div
+                      className="listfillnominal"
+                      key={index}
+                      onClick={() => handleNominalClick(value)}
+                    >
+                      <span className="valuenominal">{value}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="valueconvert">
-                  <span className="textcredit">
-                    Nominal masuk rekening : Rp
-                  </span>
-                  <span className="hasilconver">{convertToRupiah()}</span>
-                </div>
-              </div>
-              <div className="grouppassword">
-                <label htmlFor="password">Password</label>
-                <div className="groupasswordbb">
+                <div className="groupnominaldeposit">
+                  <label htmlFor="nominalwithdraw">Nominal Withdraw</label>
                   <div className="inputform">
                     <input
-                      type={showPassword ? "text" : "password"}
-                      id="password"
-                      name="password"
-                      placeholder="Masukkan password username anda"
-                      onKeyDown={handleKeyDown}
-                    />
-                    <Icon
-                      icon={showPassword ? "ri:eye-fill" : "ri:eye-off-fill"}
-                      onClick={togglePasswordVisibility}
+                      type="number"
+                      id="nominalwithdraw"
+                      name="nominalwithdraw"
+                      autoComplete="off"
+                      placeholder="Silahkan isi nominal withdraw"
+                      value={nominalWithdraw}
+                      onChange={(e) => setNominalWithdraw(e.target.value)}
+                      onBlur={handleNominalwd}
                     />
                   </div>
-                  <span className="tombol full green" onClick={handlePassword}>Cek Password</span>
+                  <div className="valueconvert">
+                    <span className="textcredit">
+                      Nominal masuk rekening : Rp
+                    </span>
+                    <span className="hasilconver">{convertToRupiah()}</span>
+                  </div>
+                </div>
+                <div className="grouppassword">
+                  <label htmlFor="password">Password</label>
+                  <div className="groupasswordbb">
+                    <div className="inputform">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        id="password"
+                        name="password"
+                        placeholder="Masukkan password username anda"
+                        onKeyDown={handleKeyDown}
+                      />
+                      <Icon
+                        icon={showPassword ? "ri:eye-fill" : "ri:eye-off-fill"}
+                        onClick={togglePasswordVisibility}
+                      />
+                    </div>
+                    <span className="tombol full green" onClick={handlePassword}>Cek Password</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  id="submitwithdraw"
+                  className="tombol full primary"
+                  onClick={handleSubmitWithdraw}
+                >
+                  Withdraw
+                </button>
+              </form>
+            )}
+            {showTransaksiDiproses && initialStatus === "Suspend" ? (
+              <div className="transaksidiproses">
+                <span className="diproses">Akun Suspend</span>
+                <span className="textdiproses">Akun Anda sedang di suspend, silahkan hubungi admin.</span>
+                <div className="groupbtnadmin">
+                  <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
+                    <Icon icon="cib:whatsapp" />
+                    Whatsapp
+                  </span>
+                  <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+                    <Icon icon="simple-icons:livechat" />
+                    Livechat
+                  </span>
                 </div>
               </div>
-              <button
-                type="button"
-                id="submitwithdraw"
-                className="tombol full primary"
-                onClick={handleSubmitWithdraw}
-              >
-                Withdraw
-              </button>
-            </form>
-            )}
+            ) : null}
+            {showTransaksiDiproses && initialStatus === "Maintenance" ? (
+              <div className="transaksidiproses">
+                <span className="diproses">Sedang Maintenance</span>
+                <span className="textdiproses">Sistem sedang dalam perbaikan, silahkan hubungi admin.</span>
+                <div className="groupbtnadmin">
+                  <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
+                    <Icon icon="cib:whatsapp" />
+                    Whatsapp
+                  </span>
+                  <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+                    <Icon icon="simple-icons:livechat" />
+                    Livechat
+                  </span>
+                </div>
+              </div>
+            ) : null }
             <div className="groupketentuandeposit">
               {ketentuanwithdraw.map((item, index) => (
                 <div key={index}>
@@ -652,7 +692,7 @@ export const WithdrawPage = () => {
       <Footer />
       <Livechat />
     </div>
-  );
+  );  
 };
 
 export default WithdrawPage;

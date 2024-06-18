@@ -154,10 +154,13 @@ export const DepositPage = () => {
   
           if (response.ok) {
             const data = await response.json();
-            if (data.status === "Waitting") {
+            if (data.status === "Waiting") {
               setShowTransaksiDiproses(true);
-              setInitialStatus("Waitting");
-            } else if (data.status === "Fail") {
+              setInitialStatus("Waiting");
+            } else if (data.status === "Fail" && data.is_suspend === true) {
+              setShowTransaksiDiproses(true);
+              setInitialStatus("Suspend");
+            } else if (data.status === "Fail" && data.message === "Deposit gagal diproses!") {
               setShowTransaksiDiproses(false);
               setIsConfirmDepositVisible(true);
               setInitialStatus("Fail");
@@ -167,6 +170,9 @@ export const DepositPage = () => {
                 text: data.message || "Deposit gagal diproses!",
                 confirmButtonText: "OK",
               });
+            } else if (data.status === "Fail" && data.is_maintenance === true ) {
+              setShowTransaksiDiproses(true);
+              setInitialStatus("Maintenance");
             } else {
               setShowTransaksiDiproses(false);
               setIsConfirmDepositVisible(true);
@@ -555,6 +561,54 @@ export const DepositPage = () => {
       <span className="textdiproses">
         Deposit anda sedang dalam proses, mohon ditunggu beberapa saat lagi.
       </span>
+      <div className="groupbtnadmin">
+        <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
+          <Icon icon="cib:whatsapp" />
+          Whatsapp
+        </span>
+        <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+          <Icon icon="simple-icons:livechat" />
+          Livechat
+        </span>
+      </div>
+    </div>
+  );
+
+  const akunSuspended = (
+    <div className="transaksidiproses">
+      <span className="diproses">Akun Suspend</span>
+      <span className="textdiproses">
+        Akun Anda sedang di suspend, silahkan hubungi admin.
+      </span>
+      <div className="groupbtnadmin">
+        <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
+          <Icon icon="cib:whatsapp" />
+          Whatsapp
+        </span>
+        <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+          <Icon icon="simple-icons:livechat" />
+          Livechat
+        </span>
+      </div>
+    </div>
+  );
+
+  const akunMaintenance = (
+    <div className="transaksidiproses">
+      <span className="diproses">Sedang Maintenance</span>
+      <span className="textdiproses">
+        Sistem sedang dalam perbaikan, silahkan hubungi admin.
+      </span>
+      <div className="groupbtnadmin">
+        <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
+          <Icon icon="cib:whatsapp" />
+          Whatsapp
+        </span>
+        <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+          <Icon icon="simple-icons:livechat" />
+          Livechat
+        </span>
+      </div>
     </div>
   );
 
@@ -616,7 +670,7 @@ export const DepositPage = () => {
   
     if (checkLastTransactionResponse.ok) {
       const data = await checkLastTransactionResponse.json();
-      if (data.status === "Waitting") {
+      if (data.status === "Waiting") {
         Swal.fire({
           title: "Deposit Masih Diproses",
           text: "Deposit anda masih dalam proses",
@@ -704,8 +758,12 @@ export const DepositPage = () => {
   };  
 
   let renderComponent;
-if (showTransaksiDiproses || initialStatus === "Waitting") {
+if (showTransaksiDiproses || initialStatus === "Waiting") {
   renderComponent = transaksiDiprosesElement;
+} else if (showTransaksiDiproses || initialStatus === "Suspend") {
+  renderComponent = akunSuspended;
+} else if (showTransaksiDiproses || initialStatus === "Maintenance") {
+  renderComponent = akunMaintenance;
 } else {
   renderComponent = (
     <form
@@ -902,10 +960,42 @@ if (showTransaksiDiproses || initialStatus === "Waitting") {
         </div>
         <div className="pilihandeposit">
           <div className="grouppilihandeposit">
-          {dataStatusBank && showTransaksiDiproses && (
+          {dataStatusBank && showTransaksiDiproses && initialStatus === "Maintenance" && (
+            <div className="transaksidiproses">
+              <span className="diproses">Sedang Maintenance</span>
+              <span className="textdiproses">Sistem sedang dalam perbaikan, silahkan hubungi admin.</span>
+              <div className="groupbtnadmin">
+                <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
+                  <Icon icon="cib:whatsapp" />
+                  Whatsapp
+                </span>
+                <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+                  <Icon icon="simple-icons:livechat" />
+                  Livechat
+                </span>
+              </div>
+            </div>
+          )}
+          {dataStatusBank && showTransaksiDiproses && initialStatus === "Waiting" && (
             <div className="transaksidiproses">
               <span className="diproses">Deposit dalam proses</span>
               <span className="textdiproses">Deposit anda sedang dalam proses, Silahkan cek saldo anda beberapa saat lagi.</span>
+              <div className="groupbtnadmin">
+                <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
+                  <Icon icon="cib:whatsapp" />
+                  Whatsapp
+                </span>
+                <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+                  <Icon icon="simple-icons:livechat" />
+                  Livechat
+                </span>
+              </div>
+            </div>
+          )}
+          {dataStatusBank && showTransaksiDiproses && initialStatus === "Suspend" && (
+            <div className="transaksidiproses">
+              <span className="diproses">Akun Suspend</span>
+              <span className="textdiproses">Akun Anda sedang di suspend, silahkan hubungi admin</span>
               <div className="groupbtnadmin">
                 <span className="tombol full green" onClick={() => handleClick(1, "Whatsapp 1", "livechat")}>
                   <Icon icon="cib:whatsapp" />
