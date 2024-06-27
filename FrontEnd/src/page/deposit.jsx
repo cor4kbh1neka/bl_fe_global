@@ -670,6 +670,7 @@ export const DepositPage = () => {
   
     if (checkLastTransactionResponse.ok) {
       const data = await checkLastTransactionResponse.json();
+      window.location.reload();
       if (data.status === "Waiting") {
         Swal.fire({
           title: "Deposit Masih Diproses",

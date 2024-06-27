@@ -6565,7 +6565,6 @@
   .statusbolajalan.hasil[data-value="false"] {
     color: var(--red-color-value);
   }
-  /* update */
   .isireff {
     display: flex;
     flex-direction: column;
