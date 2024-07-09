@@ -42,13 +42,13 @@ const Bankinfo = () => {
           ))}
         </div>
         <span className="informasigangguan">
-        {dataBank && dataBank.data && dataBank.data.filter((bank) => bank.statusxyxyy === 2).length > 0 ? (
+        {dataBank && dataBank.data && dataBank.data.filter((bank) => bank.statusxyxyy === 3).length > 0 ? (
           `Metode deposit ${dataBank.data
-            .filter((bank) => bank.statusxyxyy === 2)
+            .filter((bank) => bank.statusxyxyy === 3)
             .map((bank) => bank.bnkmstrxyxyx)
             .join(", ")} sedang dalam gangguan, mohon hubungi customer service.`
         ) : (
-          "Seluruh bank, e-wallet, dan pulsa online. Silahkan melakukan deposit."
+          "Selalu cek metode transfer dengan status online. Silahkan melakukan deposit."
         )}
       </span>
         <div className="groupketeranganbank">
