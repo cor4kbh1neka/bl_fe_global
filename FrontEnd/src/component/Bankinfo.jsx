@@ -42,9 +42,9 @@ const Bankinfo = () => {
           ))}
         </div>
         <span className="informasigangguan">
-        {dataBank && dataBank.data && dataBank.data.filter((bank) => bank.statusxyxyy === 3).length > 0 ? (
-          `Bank ${dataBank.data
-            .filter((bank) => bank.statusxyxyy === 3)
+        {dataBank && dataBank.data && dataBank.data.filter((bank) => bank.statusxyxyy === 2).length > 0 ? (
+          `Metode deposit ${dataBank.data
+            .filter((bank) => bank.statusxyxyy === 2)
             .map((bank) => bank.bnkmstrxyxyx)
             .join(", ")} sedang dalam gangguan, mohon hubungi customer service.`
         ) : (

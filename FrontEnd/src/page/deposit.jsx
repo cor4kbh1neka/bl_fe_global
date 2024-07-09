@@ -471,16 +471,12 @@ export const DepositPage = () => {
 
   const handleDownloadBarcode = () => {
     const barcodeImage = document.querySelector(".listbarcode.left img");
-    const barcodeUrl = barcodeImage.src;
+    const barcodeUrl = barcodeImage.src.replace('https://sinarperak.b-cdn.net', '/globalbola');
     const bankName = document.getElementById("pilihanbank").value;
-    const accountName = document.querySelector(
-      ".valuedatarekening.narek",
-    ).innerText;
-    const accountNumber = document.querySelector(
-      ".valuedatarekening.norek",
-    ).innerText;
+    const accountName = document.querySelector(".valuedatarekening.narek").innerText;
+    const accountNumber = document.querySelector(".valuedatarekening.norek").innerText;
     const fileName = `${bankName}-${accountName}-${accountNumber}.png`;
-
+  
     fetch(barcodeUrl)
       .then((response) => response.blob())
       .then((blob) => {
@@ -506,7 +502,7 @@ export const DepositPage = () => {
           text: "URL barcode tidak valid, hubungi admin",
         });
       });
-  };
+  };  
 
   const handleCopyRekening = () => {
     const nomorRekeningElement = document.querySelector(".valuedatarekening.norek");

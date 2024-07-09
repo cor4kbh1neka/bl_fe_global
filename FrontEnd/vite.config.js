@@ -48,6 +48,12 @@ export default defineConfig({
         secure: false,
         credentials: "omit",
       },
+      '/globalbola': {
+        target: 'https://sinarperak.b-cdn.net',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/globalbola/, ''),
+      },
     },
   },
 });

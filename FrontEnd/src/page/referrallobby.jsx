@@ -380,6 +380,8 @@ const ReferralLobbyPage = () => {
 
   const handleKeyDown = (e) => {
     const { id, value } = e.target;
+    const specialChars = /[!@#$%^&*(),.?":{}|<>_\-]/; 
+  
     if (id === "username" && value.length >= 13 && e.key !== "Backspace") {
       e.preventDefault();
     }
@@ -398,6 +400,7 @@ const ReferralLobbyPage = () => {
     if (id === "nomorrek" && value.length >= 21 && e.key !== "Backspace") {
       e.preventDefault();
     }
+  
     if (
       id === "username" ||
       id === "passworduser" ||
@@ -409,7 +412,12 @@ const ReferralLobbyPage = () => {
         e.preventDefault();
       }
     }
+  
     if (id === "namarek" && value.length === 0 && e.key === " ") {
+      e.preventDefault();
+    }
+
+    if (id === "username" && specialChars.test(e.key)) {
       e.preventDefault();
     }
   };
@@ -599,51 +607,52 @@ const ReferralLobbyPage = () => {
   };
 
   const banks = [
-    { id: 1, name: "bri", methode: "bank" },
-    { id: 2, name: "bca", methode: "bank" },
-    { id: 3, name: "bca digital", methode: "bank" },
+    { id: 1, name: "ABA Bank", methode: "bank" },
+    { id: 2, name: "bri", methode: "bank" },
+    { id: 3, name: "bca", methode: "bank" },
+    { id: 4, name: "bca digital", methode: "bank" },
     { id: 5, name: "sakuku", methode: "bank" },
     { id: 6, name: "bni", methode: "bank" },
     { id: 7, name: "mandiri", methode: "bank" },
-    { id: 10, name: "permata", methode: "bank" },
-    { id: 11, name: "panin", methode: "bank" },
-    { id: 12, name: "danamon", methode: "bank" },
-    { id: 13, name: "cimb niaga", methode: "bank" },
-    { id: 14, name: "bsi", methode: "bank" },
-    { id: 15, name: "maybank", methode: "bank" },
-    { id: 16, name: "bank jenius", methode: "bank" },
-    { id: 17, name: "bank jago", methode: "bank" },
-    { id: 18, name: "seabank", methode: "bank" },
-    { id: 19, name: "dana", methode: "ewallet" },
-    { id: 20, name: "ovo", methode: "ewallet" },
-    { id: 21, name: "gopay", methode: "ewallet" },
-    { id: 22, name: "linkaja", methode: "ewallet" },
-    { id: 23, name: "shopeepay", methode: "ewallet" },
-    { id: 25, name: "bank kalbar", methode: "bank" },
-    { id: 27, name: "bank bpd aceh", methode: "bank" },
-    { id: 28, name: "bank btn", methode: "bank" },
-    { id: 29, name: "allobank", methode: "bank" },
-    { id: 30, name: "bank btpn", methode: "bank" },
-    { id: 31, name: "bpd kalteng", methode: "bank" },
-    { id: 32, name: "keb hana", methode: "bank" },
-    { id: 33, name: "shinhan bank", methode: "bank" },
-    { id: 34, name: "arta graha", methode: "bank" },
-    { id: 35, name: "bank aceh", methode: "bank" },
-    { id: 36, name: "bank bjb", methode: "bank" },
-    { id: 37, name: "bank papua", methode: "bank" },
-    { id: 38, name: "bank kalsel", methode: "bank" },
-    { id: 39, name: "bpd kaltim", methode: "bank" },
-    { id: 40, name: "bank aladin", methode: "bank" },
-    { id: 41, name: "bank aladin syariah", methode: "bank" },
-    { id: 42, name: "bank bpdm ambon", methode: "bank" },
-    { id: 43, name: "bank bukopin", methode: "bank" },
-    { id: 44, name: "bank raya", methode: "bank" },
-    { id: 45, name: "sumsel babel", methode: "bank" },
-    { id: 46, name: "bank kalsel", methode: "bank" },
-    { id: 47, name: "ABA Bank", methode: "bank" },
-    { id: 48, name: "canadia bank", methode: "bank" },
-    { id: 49, name: "phillip bank", methode: "bank" },
-    { id: 50, name: "wing bank", methode: "bank" },
+    { id: 8, name: "permata", methode: "bank" },
+    { id: 9, name: "panin", methode: "bank" },
+    { id: 10, name: "danamon", methode: "bank" },
+    { id: 11, name: "cimb niaga", methode: "bank" },
+    { id: 12, name: "bsi", methode: "bank" },
+    { id: 13, name: "maybank", methode: "bank" },
+    { id: 14, name: "bank jenius", methode: "bank" },
+    { id: 15, name: "bank jago", methode: "bank" },
+    { id: 16, name: "seabank", methode: "bank" },
+    { id: 17, name: "dana", methode: "ewallet" },
+    { id: 18, name: "ovo", methode: "ewallet" },
+    { id: 19, name: "gopay", methode: "ewallet" },
+    { id: 20, name: "linkaja", methode: "ewallet" },
+    { id: 21, name: "shopeepay", methode: "ewallet" },
+    { id: 22, name: "bank kalbar", methode: "bank" },
+    { id: 23, name: "bank bpd aceh", methode: "bank" },
+    { id: 24, name: "bank btn", methode: "bank" },
+    { id: 25, name: "allobank", methode: "bank" },
+    { id: 26, name: "bank btpn", methode: "bank" },
+    { id: 27, name: "bpd kalteng", methode: "bank" },
+    { id: 28, name: "bpd sulteng", methode: "bank" },
+    { id: 29, name: "keb hana", methode: "bank" },
+    { id: 30, name: "shinhan bank", methode: "bank" },
+    { id: 31, name: "arta graha", methode: "bank" },
+    { id: 32, name: "bank aceh", methode: "bank" },
+    { id: 33, name: "bank bjb", methode: "bank" },
+    { id: 34, name: "bank papua", methode: "bank" },
+    { id: 35, name: "bank kalsel", methode: "bank" },
+    { id: 36, name: "bpd kaltim", methode: "bank" },
+    { id: 37, name: "bank aladin", methode: "bank" },
+    { id: 38, name: "bank aladin syariah", methode: "bank" },
+    { id: 39, name: "bank bpdm ambon", methode: "bank" },
+    { id: 40, name: "bank bukopin", methode: "bank" },
+    { id: 41, name: "bank raya", methode: "bank" },
+    { id: 42, name: "sumsel babel", methode: "bank" },
+    { id: 43, name: "bank kalsel", methode: "bank" },
+    { id: 44, name: "canadia bank", methode: "bank" },
+    { id: 45, name: "phillip bank", methode: "bank" },
+    { id: 46, name: "wing bank", methode: "bank" },
   ];
 
   return (

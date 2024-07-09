@@ -14,6 +14,7 @@ export const HistorybetdetailPage = () => {
     const fetchData = async () => {
       const response = await getDetailbet(invoice, portopolio, access);
       setDetailBet(response.result[0]);
+      console.log(response.result[0]);
     };
 
     fetchData();
