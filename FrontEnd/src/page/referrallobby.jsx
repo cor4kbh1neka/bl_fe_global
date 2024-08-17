@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../fragment/Logo";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import Footer from "../component/Footer";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
-import { login } from "../services/auth.service";
 import { MetaTags } from "../component/MetaTags";
 import Livechat from "../component/Livechat";
 import { getProvide } from "../services/api.service";
@@ -83,14 +81,13 @@ const ReferralLobbyPage = () => {
             credentials: "omit",
             headers: {
               "Content-Type": "application/json",
-              utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
+              utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI_TWO,
               "x-customblhdrs": import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN,
             },
             body: JSON.stringify({ username: xreferral }),
           });
 
           const text = await response.text();
-          console.log("Raw response:", text);
 
           let data;
           try {

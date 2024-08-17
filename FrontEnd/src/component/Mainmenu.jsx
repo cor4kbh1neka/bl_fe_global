@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import { getUsername, deleteToken, putToken } from "../services/auth.service";
+import { handleClick } from "../services/api.service";
 import Swal from "sweetalert2";
 import { Logofirts } from "../fragment/Logofirts";
 
@@ -13,6 +14,8 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
   const mainMenuRef = useRef(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showOptions, setShowOptions] = useState(false);
+  const [dekstopUrl, setDekstopUrl] = useState("");
+  const [mobileUrl, setMobileUrl] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,7 +31,7 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const access = localStorage.getItem("acme");
-    
+
     const fetchData = async () => {
       const response = await putToken(token, access);
       if (response.status) {
@@ -48,10 +51,10 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
         }
       }
     };
-  
+
     const timeoutId = setTimeout(fetchData, 3000);
     const intervalId = setInterval(fetchData, 7200000);
-  
+
     return () => {
       clearInterval(intervalId);
       clearTimeout(timeoutId);
@@ -61,7 +64,7 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
   const handlePyClick = async () => {
     const access = localStorage.getItem("acme");
     if (!username) return;
-  
+
     try {
       const response = await fetch("/prx/authlog", {
         method: "POST",
@@ -69,20 +72,20 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
           'Content-Type': 'application/json',
           utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
           Authorization: `Bearer ${access}`,
-          'x-customblhdrs' : import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
+          'x-customblhdrs': import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
         },
         body: JSON.stringify({
-          "username" : username,
-          "iswap" : "false",
-          "device" : "d"
+          "username": username,
+          "iswap": "false",
+          "device": "d"
         }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
-        
+
         const correctedUrl = data.url.replace(/\\/g, "");
-        
+
         window.location.href = correctedUrl;
       } else {
         console.error("Failed to fetch parlay URL");
@@ -97,7 +100,7 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
       console.error("Error fetching parlay URL:", error);
     }
   };
-  
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -110,67 +113,40 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
     };
   }, []);
 
-  const handleShowOptions = () => {
+  const handleShowOptions = (dekstopUrl = "", mobileUrl = "") => {
+    setDekstopUrl(dekstopUrl);
+    setMobileUrl(mobileUrl);
     setShowOptions(!showOptions);
   };
 
-  const MenuItem = ({ icon, text, url, elementa, classet }) => {
-    if (elementa === "true") {
+  const MenuItem = ({ icon, text, url, elementa, classet, dekstopurl, mobileurl, menubaru }) => {
+    if (classet === "livechat") {
+      return (
+        <div className="listmainmenu" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+          <Icon icon={icon} className={classet} />
+          <span className="textlistmainmenu">{text}</span>
+          {menubaru && <span className="newgames">baru</span>}
+        </div>
+      );
+    } else if (elementa === "true") {
       return (
         <Link to={url} className="listmainmenu">
           <Icon icon={icon} className={classet} />
           <span className="textlistmainmenu">{text}</span>
+          {menubaru && <span className="newgames">baru</span>}
         </Link>
       );
     } else {
-      const access = localStorage.getItem("acme");
-      const handleParlayClick = async () => {
-        if (!username) return;
-      
-        try {
-          const response = await fetch("/prx/authlog", {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json',
-              utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
-              Authorization: `Bearer ${access}`,
-              'x-customblhdrs' : import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
-            },
-            body: JSON.stringify({
-              "username" : username,
-              "iswap" : "false",
-              "device" : "d"
-            }),
-          });
-      
-          if (response.ok) {
-            const data = await response.json();
-            
-            const correctedUrl = data.url.replace(/\\/g, "");
-            
-            window.open(correctedUrl, '_blank');
-          } else {
-            console.error("Failed to fetch parlay URL");
-            Swal.fire({
-              text: "Akun anda belum dapat melakukan bet, Silahkan hubungi admin",
-              icon: "info",
-              confirmButtonColor: "#3085d6",
-              confirmButtonText: "OK",
-            });
-          }
-        } catch (error) {
-          console.error("Error fetching parlay URL:", error);
-        }
-      };      
-
       return (
-        <div className="listmainmenu" onClick={handleShowOptions}>
-          <Icon icon={icon} />
+        <div className="listmainmenu" onClick={() => handleShowOptions(dekstopurl, mobileurl)}>
+          <Icon icon={icon} className={classet} />
           <span className="textlistmainmenu">{text}</span>
+          {menubaru && <span className="newgames">baru</span>}
         </div>
       );
     }
-  };
+  };  
+  
 
   const MenuGroup = ({ label, items }) => (
     <div className="grouplistmainmenu">
@@ -199,15 +175,15 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
 
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
-    
+
     if (!token) {
       window.location.href = "/";
       return;
     }
-    
+
     try {
       const { status, responseData } = await deleteToken(token);
-    
+
       if (status) {
         localStorage.removeItem("token");
         localStorage.removeItem("acme");
@@ -306,6 +282,7 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
           url: "/setting",
           elementa: "true",
           classet: "",
+          menubaru: true,
         },
       ],
     },
@@ -325,63 +302,87 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
 
   const pasangItems = [
     {
-      label: "sports",
+      label: "Sportbooks",
       items: [
         {
           icon: "ph:soccer-ball",
-          text: "soccer",
+          text: "sbobet",
           url: "/sbobetmobile",
           elementa: "false",
           classet: "",
+          dekstopurl: "/dekstopgames/sportsbobet",
+          mobileurl: "/mobilegames/sportsbobet",
+          menubaru: false,
         },
+        // {
+        //   icon: "ph:soccer-ball",
+        //   text: "568win",
+        //   url: "/sbobetmobile",
+        //   elementa: "false",
+        //   classet: "",
+        //   dekstopurl: "/dekstopgames/sport568win",
+        //   mobileurl: "/mobilegames/sport568win",
+        //   menubaru: true,
+        // },
+      ],
+    },
+    {
+      label: "Slot Games",
+      items: [
         {
-          icon: "streamline:esports",
-          text: "esport",
+          icon: "mdi:slot-machine-outline",
+          text: "All Games Slot",
           url: "/sbobetmobile",
           elementa: "false",
           classet: "",
+          dekstopurl: "/dekstopgames/slotgames",
+          mobileurl: "/mobilegames/slotgames",
+          menubaru: true,
         },
+      ],
+    },
+    {
+      label: "Live Casino",
+      items: [
         {
-          icon: "ic:outline-sports-mma",
-          text: "MMA",
+          icon: "mdi:casino-chip",
+          text: "568win",
           url: "/sbobetmobile",
           elementa: "false",
           classet: "",
+          dekstopurl: "/dekstopgames/livecasino568win",
+          mobileurl: "/mobilegames/livecasino568win",
+          menubaru: true,
         },
+      ],
+    },
+    {
+      label: "Virtual Sportbooks",
+      items: [
         {
-          icon: "mdi:tennis",
-          text: "tennis",
+          icon: "eos-icons:virtual-guest",
+          text: "568win",
           url: "/sbobetmobile",
           elementa: "false",
           classet: "",
+          dekstopurl: "/dekstopgames/virtual568win",
+          mobileurl: "/mobilegames/virtual568win",
+          menubaru: true,
         },
+      ],
+    },
+    {
+      label: "Virtual Casino",
+      items: [
         {
-          icon: "cil:american-football",
-          text: "ametican footbal",
+          icon: "arcticons:db-casino",
+          text: "Royal Baccarat",
           url: "/sbobetmobile",
           elementa: "false",
           classet: "",
-        },
-        {
-          icon: "solar:basketball-outline",
-          text: "NBA",
-          url: "/sbobetmobile",
-          elementa: "false",
-          classet: "",
-        },
-        {
-          icon: "fluent-mdl2:golf",
-          text: "golf",
-          url: "/sbobetmobile",
-          elementa: "false",
-          classet: "",
-        },
-        {
-          icon: "mdi:badminton",
-          text: "badminton",
-          url: "/sbobetmobile",
-          elementa: "false",
-          classet: "",
+          dekstopurl: "/dekstopgames/virtualcasinoroyal",
+          mobileurl: "/mobilegames/virtualcasinoroyal",
+          menubaru: true,
         },
       ],
     },
@@ -389,7 +390,7 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
 
   const fiturItems = [
     {
-      label: "Fitur",
+      label: "Soccer",
       items: [
         {
           icon: "arcticons:livescore",
@@ -411,6 +412,19 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
           url: "/prediksi",
           elementa: "true",
           classet: "",
+        },
+      ],
+    },
+    {
+      label: "Slot Games",
+      items: [
+        {
+          icon: "emojione-v1:slot-machine",
+          text: "Return to Player (RTP slot)",
+          url: "/rtplobby",
+          elementa: "true",
+          classet: "",
+          menubaru: true,
         },
       ],
     },
@@ -455,13 +469,15 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
                   >
                     <Icon icon="system-uicons:circle-menu" />
                     <span className="textmenutoggle">MENU</span>
+                    <span className="newgames">baru</span>
                   </div>
                   <div
                     className={`listmenutoggle ${activeMenu === "pasang" ? "active" : ""}`}
                     onClick={() => handleMenuToggle("pasang")}
                   >
                     <Icon icon="ph:soccer-ball" />
-                    <span className="textmenutoggle">SPORT</span>
+                    <span className="textmenutoggle">GAMES</span>
+                    <span className="newgames">baru</span>
                   </div>
                   <div
                     className={`listmenutoggle ${activeMenu === "prediksi" ? "active" : ""}`}
@@ -469,6 +485,7 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
                   >
                     <Icon icon="f7:sportscourt" />
                     <span className="textmenutoggle">FITUR</span>
+                    <span className="newgames">baru</span>
                   </div>
                 </div>
               </div>
@@ -493,24 +510,17 @@ export const Mainmenu = ({ isMainmenuVisible, setIsMainmenuVisible }) => {
       <div className={`sbobetopsi ${showOptions ? "show" : ""}`}>
         <div className="secsbobetopsi">
           <div className="cckomponenklik grouplogodanhalaman">
-            <span className="closeshowme" onClick={handleShowOptions}>x</span>
+            <span className="closeshowme" onClick={() => handleShowOptions()}>x</span>
               <Logofirts />
               <div className="grouplistbuttonbet">
-                {windowWidth < 730 ? (
-                  <div className="groupbuttonbet listnavigasi parlay" onClick={handlePyClick}>
-                    <Icon icon="noto:coin" />
-                    <span>Dekstop</span>
-                  </div>
-                ) : (
-                  <Link to="/sbobetdekstop" className="groupbuttonbet listnavigasi parlay">
+                  <Link to={dekstopUrl} className="groupbuttonbet listnavigasi parlay" onClick={() => handleShowOptions()}>
                     <Icon icon="noto:coin" />
                     <span>Dekstop</span>
                   </Link>
-                )}
-                <Link to="/sbobetmobile" className="groupbuttonbet listnavigasi parlay">
-                  <Icon icon="noto:coin" />
-                  <span>Mobile</span>
-                </Link>
+                  <Link to={mobileUrl} className="groupbuttonbet listnavigasi parlay" onClick={() => handleShowOptions()}>
+                    <Icon icon="noto:coin" />
+                    <span>Mobile</span>
+                  </Link>
               </div>
             </div>
           </div>

@@ -12,6 +12,7 @@ export const MemoPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [visiblePages, setVisiblePages] = useState([1, 2, 3]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedMemos, setSelectedMemos] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -104,7 +105,36 @@ export const MemoPage = () => {
 
     localStorage.setItem("sumMemo", JSON.stringify(updatedMemo));
     setxMemo(updatedMemo);
-    navigate(`/pesan/${memoId}`); // Navigate to memo page without refreshing
+    navigate(`/pesan/${memoId}`);
+  };
+
+  const handleCheckboxChange = (e, memoId) => {
+    if (e.target.checked) {
+      setSelectedMemos(prevSelected => [...prevSelected, memoId]);
+    } else {
+      setSelectedMemos(prevSelected => prevSelected.filter(id => id !== memoId));
+    }
+  };
+
+  const handleCheckAll = (e) => {
+    if (e.target.checked) {
+      setSelectedMemos(currentMemo.map(memo => memo.idmemo));
+    } else {
+      setSelectedMemos([]);
+    }
+  };
+
+  const markAsRead = () => {
+    const updatedMemo = xMemo.map(memo => {
+      if (selectedMemos.includes(memo.idmemo)) {
+        return { ...memo, read: "true" };
+      }
+      return memo;
+    });
+
+    localStorage.setItem("sumMemo", JSON.stringify(updatedMemo));
+    setxMemo(updatedMemo);
+    setSelectedMemos([]);
   };
 
   const renderPaginationNumbers = () => {
@@ -133,10 +163,15 @@ export const MemoPage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container memopage">
       <Lobbynavbar pageTitle="memo" />
       <div className="sechistory">
         <div className="groupsechistory">
+          {selectedMemos.length > 0 && (
+            <div className="groubuttonbaca">
+              <button className="tombol full primary tandaitelah" id="telahdibaca" onClick={markAsRead}>Tandai telah di baca</button>
+            </div>
+          )}
           {isLoading ? renderSkeleton() : (
             <div className="datasechistory">
               {xMemo.length === 0 ? (
@@ -146,7 +181,9 @@ export const MemoPage = () => {
                   <table>
                     <tbody>
                       <tr className="hover">
-                        <th className="bgnos">#</th>
+                        <th className="bgnos">
+                          <input type="checkbox" id="checkall" name="checkall" onChange={handleCheckAll} />
+                        </th>
                         <th className="bgtanggal">tanggal</th>
                         <th>subject</th>
                       </tr>
@@ -154,12 +191,19 @@ export const MemoPage = () => {
                         <tr
                           key={index}
                           className={`hovered ${memo.read === "false" ? "unread" : ""}`}
-                          onClick={() => handleMemoClick(memo.idmemo)}
                         >
-                          <td>{index + 1}</td>
+                          <td>
+                            <input
+                              type="checkbox"
+                              id={index}
+                              name={index}
+                              checked={selectedMemos.includes(memo.idmemo)}
+                              onChange={(e) => handleCheckboxChange(e, memo.idmemo)}
+                            />
+                          </td>
                           <td>{formatOrderTime(memo.created_at)}</td>
                           <td>
-                            <div className="bodysubject">
+                            <div className="bodysubject" onClick={() => handleMemoClick(memo.idmemo)}>
                               <span className="subjectmemo">{memo.subject}</span>
                             </div>
                           </td>

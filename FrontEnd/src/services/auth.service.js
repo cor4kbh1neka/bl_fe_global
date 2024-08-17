@@ -127,7 +127,7 @@ export const getCoinxx = async (xxusername, accesstoken ) => {
         credentials: "omit",
         headers: {
           'Content-Type': 'application/json',
-          utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
+          utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI_TWO,
           Authorization: `Bearer ${accesstoken}`,
           'x-customblhdrs' : import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
         },
@@ -209,6 +209,70 @@ export const getReferral = async (xxusername, accesstoken) => {
         headers: {
           'Content-Type': 'application/json',
           utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
+          Authorization: `Bearer ${accesstoken}`,
+          'x-customblhdrs' : import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
+        },
+        body: JSON.stringify({username: xxusername}),
+      },
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.error("Failed to fetch data from API");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching data from API:", error);
+    return null;
+  }
+};
+
+export const uptPassword = async (xxusername, accesstoken, xxipaddress, newpassword) => {
+  try {
+    const response = await fetch("/prx/chngpswd",
+      {
+        method: "POST",
+        credentials: "omit",
+        headers: {
+          'Content-Type': 'application/json',
+          utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
+          Authorization: `Bearer ${accesstoken}`,
+          'x-customblhdrs' : import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
+        },
+        body: JSON.stringify(
+          {
+            username: xxusername,
+            password: newpassword,
+            ipaddress: xxipaddress
+          }
+        ),
+      },
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.error("Failed to fetch data from API");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching data from API:", error);
+    return null;
+  }
+};
+
+export const getHistoryuser = async (xxusername, accesstoken) => {
+  try {
+    const response = await fetch("/prx/gethstchngpswd",
+      {
+        method: "POST",
+        credentials: "omit",
+        headers: {
+          'Content-Type': 'application/json',
+          utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI_TWO,
           Authorization: `Bearer ${accesstoken}`,
           'x-customblhdrs' : import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
         },
