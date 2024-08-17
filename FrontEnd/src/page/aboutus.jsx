@@ -58,14 +58,14 @@ const AboutPage = () => {
           <main>
             <section className="aboutmess">
                 <h2>Mengapa Memilih {dataProvide.nmwebsite}?</h2>
-                <p>{dataProvide.nmwebsite} adalah platform taruhan sepak bola dan olahraga online yang terpercaya dan terkemuka. Kami menawarkan peluang terbaik dan berbagai pilihan taruhan untuk para penggemar olahraga.</p>
+                <p><Link to="/" style={{color: "var(--primary-color)", fontWeight: "bold"}}>{dataProvide.nmwebsite}</Link> adalah platform taruhan sepak bola dan olahraga online yang terpercaya dan terkemuka. Kami menawarkan peluang terbaik dan berbagai pilihan taruhan untuk para penggemar olahraga.</p>
             </section>
 
             <section className="aboutmess">
                 <h2>Cara Bergabung dengan {dataProvide.nmwebsite}</h2>
                 <p>Untuk mulai bertaruh di {dataProvide.nmwebsite}, ikuti langkah-langkah sederhana berikut:</p>
                 <ul>
-                    <li><strong>Daftar Akun:</strong> Klik tombol "Daftar" dan isi formulir pendaftaran dengan informasi yang diperlukan.</li>
+                    <li><strong>Daftar Akun:</strong> Klik tombol <strong>"<a href="/register">Daftar</a>"</strong> dan isi formulir pendaftaran dengan informasi yang diperlukan.</li>
                     <li><strong>Deposit Dana:</strong> Lakukan deposit menggunakan metode pembayaran yang tersedia.</li>
                     <li><strong>Mulai Bertaruh:</strong> Pilih pertandingan dan jenis taruhan yang diinginkan, lalu pasang taruhan Anda.</li>
                 </ul>
@@ -74,7 +74,7 @@ const AboutPage = () => {
             <section className="aboutmess">
                 <h2>Jenis Taruhan di {dataProvide.nmwebsite}</h2>
                 <h3>1. Taruhan Sepak Bola</h3>
-                <p>Kami menawarkan berbagai jenis taruhan sepak bola, termasuk:</p>
+                <p>Kami menawarkan berbagai jenis <Link to="/games/sportbook" style={{color: "var(--primary-color)", fontWeight: "bold"}}>taruhan sepak bola</Link>, termasuk:</p>
                 <ul>
                     <li><strong>Taruhan 1X2:</strong> Taruhan pada hasil akhir pertandingan (Menang, Seri, Kalah).</li>
                     <li><strong>Over/Under:</strong> Taruhan pada jumlah total gol yang dicetak dalam pertandingan.</li>
@@ -92,12 +92,60 @@ const AboutPage = () => {
                     <li>MMA</li>
                 </ul>
 
-                <h3>3. Berbagai Fitur Olahraga</h3>
+                <h3>3. Taruhan Virtual Sport</h3>
+                <p>{dataProvide.nmwebsite} menawarkan taruhan pada berbagai <Link to="/games/virtualsportbook" style={{color: "var(--primary-color)", fontWeight: "bold"}}>olahraga virtual</Link> yang dapat diakses kapan saja, termasuk:</p>
+                <ul>
+                    <li>Virtual Football</li>
+                    <li>Virtual Basketball</li>
+                    <li>Virtual Tennis</li>
+                </ul>
+
+                <h3>4. Taruhan Live Casino</h3>
+                <p>Nikmati pengalaman kasino langsung dari rumah Anda dengan berbagai pilihan permainan <Link to="/games/livecasino" style={{color: "var(--primary-color)", fontWeight: "bold"}}>live casino</Link> di {dataProvide.nmwebsite}, termasuk:</p>
+                <ul>
+                    <li>Live Roulette</li>
+                    <li>Live Blackjack</li>
+                    <li>Live Baccarat</li>
+                </ul>
+
+                <h3>5. Taruhan Virtual Casino</h3>
+                <p>{dataProvide.nmwebsite} juga menyediakan berbagai permainan <Link to="/games/virtualcasino" style={{color: "var(--primary-color)", fontWeight: "bold"}}>kasino virtual</Link> yang menarik, seperti:</p>
+                <ul>
+                    <li>Virtual Slots</li>
+                    <li>Virtual Poker</li>
+                    <li>Virtual Bingo</li>
+                </ul>
+
+                <h3>6. Taruhan Slot</h3>
+                <p>Nikmati berbagai pilihan permainan <Link to="/games/slot" style={{color: "var(--primary-color)", fontWeight: "bold"}}>slot</Link> dengan tema yang menarik dan peluang menang yang tinggi di {dataProvide.nmwebsite}. Kami menawarkan permainan dari berbagai penyedia terkemuka seperti:</p>
+                <ul>
+                    <li>PragmaticPlay</li>
+                    <li>PGSoft</li>
+                    <li>MicroGaming</li>
+                    <li>SBO Slot</li>
+                    <li>CQNine</li>
+                    <li>JokerGaming</li>
+                    <li>RTG</li>
+                    <li>WorldMatch</li>
+                    <li>FunkyGames</li>
+                    <li>Netent</li>
+                    <li>Kiron</li>
+                    <li>PlayNGo</li>
+                    <li>QuickSpin</li>
+                    <li>RedTiger</li>
+                    <li>Yggdrasil</li>
+                    <li>Gamatron</li>
+                    <li>GiocoPlus</li>
+                    <li>LionKing</li>
+                </ul>
+
+                <h3>7. Berbagai Fitur Olahraga</h3>
                 <p>Situs {dataProvide.nmwebsite} juga menyediakan berbagai fitur olahraga yang dapat Anda gunakan, seperti:</p>
                 <ul>
-                    <li>Klasemen Liga</li>
-                    <li>Livescore</li>
+                    <li><Link to="/klasemenhome" style={{color: "var(--primary-color)", fontWeight: "bold"}}>Klasemen Liga</Link></li>
+                    <li><Link to="/livescorehome" style={{color: "var(--primary-color)", fontWeight: "bold"}}>Livescore</Link></li>
                     <li>Prediksi Pertandingan</li>
+                    <li>RTP Slot</li>
                 </ul>
             </section>
 
@@ -108,7 +156,7 @@ const AboutPage = () => {
 
             <section className="aboutmess">
                 <h2>Dukungan Pelanggan</h2>
-                <p>Tim dukungan pelanggan kami siap membantu Anda 24/7. Jika Anda memiliki pertanyaan atau mengalami masalah, jangan ragu untuk menghubungi kami melalui live chat, email, atau Whatsapp.</p>
+                <p>Tim dukungan pelanggan kami siap membantu Anda 24/7. Jika Anda memiliki pertanyaan atau mengalami masalah, jangan ragu untuk <Link to="/hubungi" style={{color: "var(--primary-color)", fontWeight: "bold"}}>menghubungi kami</Link> melalui live chat, email, atau Whatsapp.</p>
             </section>
           </main>
         </div>

@@ -24,8 +24,6 @@ import MatchPage from "./page/match.jsx";
 import PrediksiPage from "./page/prediksi.jsx";
 import HistorybetPage from "./page/historybet.jsx";
 import HistorybetdetailPage from "./page/historybetdetail.jsx";
-import SbobetmobilePage from "./page/sbobetmobile.jsx";
-import SbobetdekstopPage from "./page/sbobetdekstop.jsx";
 import HistorybetdekstopPage from "./page/historybetdekstop.jsx";
 import HistorybetdekstopdetailPage from "./page/historybetdekstopdetail.jsx";
 import MaintenancePage from "./page/maintenance.jsx";
@@ -34,6 +32,10 @@ import AboutPage from "./page/aboutus.jsx";
 import ContactPage from "./page/contact.jsx";
 import "./index.css";
 import ReferralLobbyPage from "./page/referrallobby.jsx";
+import GamesHomePage from "./page/homegames.jsx";
+import LobbyGamesdekstopPage from "./page/lgamesdekstop.jsx";
+import LobbyGamesMobilePage from "./page/lgamesmobile.jsx";
+import RtpPage from "./page/rtp.jsx";
 
 const router = createBrowserRouter([
   {
@@ -177,13 +179,23 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/sbobetmobile",
-    element: <SbobetmobilePage />,
+    path: "/rtplobby",
+    element: <RtpPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/sbobetdekstop",
-    element: <SbobetdekstopPage />,
+    path: "/games/:games",
+    element: <GamesHomePage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dekstopgames/:namegames",
+    element: <LobbyGamesdekstopPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/mobilegames/:namegames",
+    element: <LobbyGamesMobilePage />,
     errorElement: <ErrorPage />,
   },
   {

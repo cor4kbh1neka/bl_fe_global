@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getUsername, getCoinxx, banking } from "../services/auth.service";
-import { getMemo, getProvide } from "../services/api.service";
+import { getMemo } from "../services/api.service";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import Runningtext from "../fragment/Runningtext";
 import Mainmenu from "../component/Mainmenu";
 import { Logofirts } from "./Logofirts";
+import Swal from "sweetalert2";
 
-export const Lobbynavbar = ({ pageTitle }) => {
+export const Lobbynavbar = ({ pageTitle, linkurldekstop, linkurlmobile, prediksimenu }) => {
   const [username, setUsername] = useState("");
   const [accesstoken, setAccesstoken] = useState("");
   const [balance, setBalance] = useState("");
@@ -203,11 +204,41 @@ export const Lobbynavbar = ({ pageTitle }) => {
 
   const handleHistoryBetDesktop = () => {
     const width = 425;
-    const height = 750;
-    const left = window.innerWidth / 2 - width / 2.5;
-    const top = window.innerHeight / 2 - height / 2;
+    const height = 800;
+    const left = window.innerWidth / 1.15 - width / 2;
+    const top = window.innerHeight / 2 - height / 2.5;
   
     const url = "/historybetdekstop";
+  
+    window.open(
+      url,
+      "_blank",
+      `width=${width}, height=${height}, left=${left}, top=${top}`
+    );
+  };
+
+  const handlePrediksisportDesktop = () => {
+    const width = 425;
+    const height = 800;
+    const left = window.innerWidth / 1.15 - width / 2;
+    const top = window.innerHeight / 2 - height / 2.5;
+  
+    const url = "/prediksi";
+  
+    window.open(
+      url,
+      "_blank",
+      `width=${width}, height=${height}, left=${left}, top=${top}`
+    );
+  };
+
+  const handleRtpslotDesktop = () => {
+    const width = 425;
+    const height = 800;
+    const left = window.innerWidth / 1.15 - width / 2;
+    const top = window.innerHeight / 2 - height / 2.5;
+  
+    const url = "/rtplobby";
   
     window.open(
       url,
@@ -289,30 +320,27 @@ export const Lobbynavbar = ({ pageTitle }) => {
                   onClick={handleMainMenuToggle}
                 />
                 <div className="groupbuttonnavigasi">
-                  <Link to="/prediksi" className="listnavigasi parlay">
-                    prediksi
-                  </Link>
+                  {prediksimenu === "slotgames" ? (
+                    <div className="listnavigasi parlay" onClick={handleRtpslotDesktop} >
+                      RTP Slot
+                    </div>
+                  ) : (
+                    <div className="listnavigasi parlay" onClick={handlePrediksisportDesktop}>
+                      prediksi
+                    </div>
+                  )}
                   <div
                     className="listnavigasi withdraw"
                     onClick={handleShowOptions}
                   >
                     parlay
                   </div>
-                  {windowWidth < 730 ? (
-                    <span
-                      className="listnavigasi sbobetmode dekstop"
-                      onClick={handleParlayClick}
-                    >
-                    dekstop
-                    </span>
-                  ) : (
-                    <Link to="/sbobetdekstop"
+                    <Link to={linkurldekstop}
                       className="listnavigasi sbobetmode dekstop"
                     >
                       dekstop
                     </Link>
-                  )}
-                  <Link to="/sbobetmobile" className="listnavigasi sbobetmode mobile">
+                  <Link to={linkurlmobile} className="listnavigasi sbobetmode mobile">
                       <span>Mobile Version</span>
                   </Link>
                   <div className="listnavigasi sbobetmode mobile historybet" onClick={handleHistoryBetDesktop}>
@@ -379,18 +407,11 @@ export const Lobbynavbar = ({ pageTitle }) => {
             <span className="closeshowme" onClick={handleShowOptions}>x</span>
               <Logofirts />
               <div className="grouplistbuttonbet">
-                {windowWidth < 730 ? (
-                  <div className="groupbuttonbet listnavigasi parlay" onClick={handleParlayClick}>
-                    <Icon icon="noto:coin" />
-                    <span>Dekstop</span>
-                  </div>
-                ) : (
-                  <Link to="/sbobetdekstop" className="groupbuttonbet listnavigasi parlay">
-                    <Icon icon="noto:coin" />
-                    <span>Dekstop</span>
-                  </Link>
-                )}
-                <Link to="/sbobetmobile" className="groupbuttonbet listnavigasi parlay">
+                <Link to="/dekstopgames/sportsbobet" className="groupbuttonbet listnavigasi parlay">
+                  <Icon icon="noto:coin" />
+                  <span>Dekstop</span>
+                </Link>
+                <Link to="/mobilegames/sportsbobet" className="groupbuttonbet listnavigasi parlay">
                   <Icon icon="noto:coin" />
                   <span>Mobile</span>
                 </Link>

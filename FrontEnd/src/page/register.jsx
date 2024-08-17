@@ -82,7 +82,7 @@ const RegisterPage = () => {
             credentials: "omit",
             headers: {
               "Content-Type": "application/json",
-              utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
+              utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI_TWO,
               "x-customblhdrs": import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN,
             },
             body: JSON.stringify({ username: xreferral }),

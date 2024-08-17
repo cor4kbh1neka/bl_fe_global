@@ -140,7 +140,7 @@ export const DepositPage = () => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
+              utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI_TWO,
               Authorization: `Bearer ${accesstoken}`,
               'x-customblhdrs' : import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
             },
@@ -562,7 +562,7 @@ export const DepositPage = () => {
           <Icon icon="cib:whatsapp" />
           Whatsapp
         </span>
-        <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+        <span className="tombol full tmblivechat" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
           <Icon icon="simple-icons:livechat" />
           Livechat
         </span>
@@ -581,7 +581,7 @@ export const DepositPage = () => {
           <Icon icon="cib:whatsapp" />
           Whatsapp
         </span>
-        <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+        <span className="tombol full tmblivechat" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
           <Icon icon="simple-icons:livechat" />
           Livechat
         </span>
@@ -600,7 +600,7 @@ export const DepositPage = () => {
           <Icon icon="cib:whatsapp" />
           Whatsapp
         </span>
-        <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+        <span className="tombol full tmblivechat" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
           <Icon icon="simple-icons:livechat" />
           Livechat
         </span>
@@ -652,7 +652,7 @@ export const DepositPage = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI,
+        utilitiesgenerate: import.meta.env.VITE_CR_ONE_UTILI_TWO,
         Authorization: `Bearer ${accesstoken}`,
         'x-customblhdrs': import.meta.env.VITE_CR_ONE_AUTHORIZATION_TOKEN
       },
@@ -966,7 +966,7 @@ if (showTransaksiDiproses || initialStatus === "Waiting") {
                   <Icon icon="cib:whatsapp" />
                   Whatsapp
                 </span>
-                <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+                <span className="tombol full tmblivechat" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
                   <Icon icon="simple-icons:livechat" />
                   Livechat
                 </span>
@@ -982,7 +982,7 @@ if (showTransaksiDiproses || initialStatus === "Waiting") {
                   <Icon icon="cib:whatsapp" />
                   Whatsapp
                 </span>
-                <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+                <span className="tombol full tmblivechat" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
                   <Icon icon="simple-icons:livechat" />
                   Livechat
                 </span>
@@ -998,7 +998,7 @@ if (showTransaksiDiproses || initialStatus === "Waiting") {
                   <Icon icon="cib:whatsapp" />
                   Whatsapp
                 </span>
-                <span className="tombol full primary" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
+                <span className="tombol full tmblivechat" onClick={() => handleClick(11, "Live Chat", "Whatsapp 1")}>
                   <Icon icon="simple-icons:livechat" />
                   Livechat
                 </span>
