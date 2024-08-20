@@ -899,7 +899,7 @@ export const dataGames = [
         namaprovider: "ALL GAME SLOT",
         img: "../assets/img/games/provider/allslotsgame.webp",
         url: "slotgames",
-        request: "/prx/authlog/Trdprty",
+        request: "/prx/authlog/slsgms",
         dekstopurl: "/dekstopgames/slotgames",
         mobileurl: "/mobilegames/slotgames",
         gamebaru: true,
