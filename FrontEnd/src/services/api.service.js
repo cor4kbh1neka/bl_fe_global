@@ -662,96 +662,96 @@ export const dataGameslogin = [
       "keyword": "permainan slot, slot aman, slot terpercaya, layanan slot, situs slot, slot terbaik",
       "gamesimg": "../assets/img/games/banner/slot.webp",
       "provider": [
-          {
-              "id": "1",
-              "nmprovider": "PragmaticPlay",
-              "img": "../assets/img/games/provider/pragmaticplay.webp"
-          },
-          {
-              "id": "2",
-              "nmprovider": "PGSoft",
-              "img": "../assets/img/games/provider/pgsoft.webp"
-          },
-          {
-              "id": "3",
-              "nmprovider": "MicroGaming",
-              "img": "../assets/img/games/provider/microgaming.webp"
-          },
+          // {
+          //     "id": "1",
+          //     "nmprovider": "PragmaticPlay",
+          //     "img": "../assets/img/games/provider/pragmaticplay.webp"
+          // },
+          // {
+          //     "id": "2",
+          //     "nmprovider": "PGSoft",
+          //     "img": "../assets/img/games/provider/pgsoft.webp"
+          // },
+          // {
+          //     "id": "3",
+          //     "nmprovider": "MicroGaming",
+          //     "img": "../assets/img/games/provider/microgaming.webp"
+          // },
           {
               "id": "4",
               "nmprovider": "SBO Slot",
               "img": "../assets/img/games/provider/sbobetslot.webp"
           },
-          {
-              "id": "5",
-              "nmprovider": "CQNine",
-              "img": "../assets/img/games/provider/cqnine.webp"
-          },
-          {
-              "id": "6",
-              "nmprovider": "JokerGaming",
-              "img": "../assets/img/games/provider/jokergaming.webp"
-          },
-          {
-              "id": "7",
-              "nmprovider": "RTG",
-              "img": "../assets/img/games/provider/rtg.webp"
-          },
-          {
-              "id": "8",
-              "nmprovider": "WorldMatch",
-              "img": "../assets/img/games/provider/worldmatch.webp"
-          },
-          {
-              "id": "9",
-              "nmprovider": "FunkyGames",
-              "img": "../assets/img/games/provider/funkygames.webp"
-          },
-          {
-              "id": "10",
-              "nmprovider": "Netent",
-              "img": "../assets/img/games/provider/netent.webp"
-          },
-          {
-              "id": "11",
-              "nmprovider": "Kiron",
-              "img": "../assets/img/games/provider/kiron.webp"
-          },
-          {
-              "id": "12",
-              "nmprovider": "PlayNGo",
-              "img": "../assets/img/games/provider/playngo.webp"
-          },
-          {
-              "id": "13",
-              "nmprovider": "QuickSpin",
-              "img": "../assets/img/games/provider/quickspin.webp"
-          },
-          {
-              "id": "14",
-              "nmprovider": "RedTiger",
-              "img": "../assets/img/games/provider/redtiger.webp"
-          },
-          {
-              "id": "15",
-              "nmprovider": "Yggdrasil",
-              "img": "../assets/img/games/provider/yggdrasil.webp"
-          },
-          {
-              "id": "16",
-              "nmprovider": "Gamatron",
-              "img": "../assets/img/games/provider/gamatron.webp"
-          },
-          {
-              "id": "17",
-              "nmprovider": "GiocoPlus",
-              "img": "../assets/img/games/provider/giocoplus.webp"
-          },
-          {
-              "id": "18",
-              "nmprovider": "LionKing",
-              "img": "../assets/img/games/provider/lionking.webp"
-          }
+          // {
+          //     "id": "5",
+          //     "nmprovider": "CQNine",
+          //     "img": "../assets/img/games/provider/cqnine.webp"
+          // },
+          // {
+          //     "id": "6",
+          //     "nmprovider": "JokerGaming",
+          //     "img": "../assets/img/games/provider/jokergaming.webp"
+          // },
+          // {
+          //     "id": "7",
+          //     "nmprovider": "RTG",
+          //     "img": "../assets/img/games/provider/rtg.webp"
+          // },
+          // {
+          //     "id": "8",
+          //     "nmprovider": "WorldMatch",
+          //     "img": "../assets/img/games/provider/worldmatch.webp"
+          // },
+          // {
+          //     "id": "9",
+          //     "nmprovider": "FunkyGames",
+          //     "img": "../assets/img/games/provider/funkygames.webp"
+          // },
+          // {
+          //     "id": "10",
+          //     "nmprovider": "Netent",
+          //     "img": "../assets/img/games/provider/netent.webp"
+          // },
+          // {
+          //     "id": "11",
+          //     "nmprovider": "Kiron",
+          //     "img": "../assets/img/games/provider/kiron.webp"
+          // },
+          // {
+          //     "id": "12",
+          //     "nmprovider": "PlayNGo",
+          //     "img": "../assets/img/games/provider/playngo.webp"
+          // },
+          // {
+          //     "id": "13",
+          //     "nmprovider": "QuickSpin",
+          //     "img": "../assets/img/games/provider/quickspin.webp"
+          // },
+          // {
+          //     "id": "14",
+          //     "nmprovider": "RedTiger",
+          //     "img": "../assets/img/games/provider/redtiger.webp"
+          // },
+          // {
+          //     "id": "15",
+          //     "nmprovider": "Yggdrasil",
+          //     "img": "../assets/img/games/provider/yggdrasil.webp"
+          // },
+          // {
+          //     "id": "16",
+          //     "nmprovider": "Gamatron",
+          //     "img": "../assets/img/games/provider/gamatron.webp"
+          // },
+          // {
+          //     "id": "17",
+          //     "nmprovider": "GiocoPlus",
+          //     "img": "../assets/img/games/provider/giocoplus.webp"
+          // },
+          // {
+          //     "id": "18",
+          //     "nmprovider": "LionKing",
+          //     "img": "../assets/img/games/provider/lionking.webp"
+          // }
       ]
   },
   {
