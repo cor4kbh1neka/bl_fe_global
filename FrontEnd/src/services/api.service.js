@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Swal from "sweetalert2";
 
 // export const FetchParlayUrl = ({ username, setParlayUrl }) => {

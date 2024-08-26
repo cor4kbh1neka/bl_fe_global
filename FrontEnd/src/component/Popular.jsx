@@ -24,32 +24,42 @@ const Popular = () => {
             return;
           }
         }
-
+  
         const fetchPromises = dataCompetition.map((item) =>
           fetchDataPopular(item.leagueId),
         );
         let combinedData = await Promise.all(fetchPromises);
-
+  
         combinedData = combinedData
-          .filter((data) => !data.hasOwnProperty("error") || data.error !== 404)
+          .filter(
+            (data) =>
+              data !== null && 
+              (!data.hasOwnProperty("error") ||
+                (data.error !== 404 && data.error !== 503))
+          )
           .flat()
           .filter((data) => data.match_status === "");
-
-        localStorage.setItem(
-          "dataPopular",
-          JSON.stringify({
-            data: combinedData,
-            timestamp: new Date().getTime(),
-          }),
-        );
-
-        setCombinedData(combinedData);
+  
+        if (combinedData.length > 0) {
+          localStorage.setItem(
+            "dataPopular",
+            JSON.stringify({
+              data: combinedData,
+              timestamp: new Date().getTime(),
+            }),
+          );
+          setCombinedData(combinedData);
+        } else {
+          console.warn("No valid data available to display.");
+        }
+        
         setLoading(false);
       } catch (error) {
         console.error("Error fetching combined data:", error);
+        setLoading(false);
       }
     };
-
+  
     fetchCombinedData();
   }, []);
 
