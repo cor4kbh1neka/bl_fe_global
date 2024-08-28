@@ -42,6 +42,17 @@ const RegisterPage = () => {
     setuju: false,
   });
 
+  useEffect(() => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("acme");
+    localStorage.removeItem("dataVerified");
+    localStorage.removeItem("broker");
+    localStorage.removeItem("brokerwd");
+    localStorage.removeItem("iseco");
+    localStorage.removeItem("lastFetchTimestamp");
+    localStorage.removeItem("exSure");
+  }, []);
+
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [dataProvide, setDataProvide] = useState([]);
   const [error, setError] = useState(null);
