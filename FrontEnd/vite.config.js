@@ -54,6 +54,11 @@ export default defineConfig({
         secure: false,
         rewrite: (path) => path.replace(/^\/globalbola/, ''),
       },
+      "/sitemap": {
+        target: "http://localhost:3030", // Arahkan ke server Express di port 3030
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/sitemap/, '/sitemap'), // Sesuaikan path jika diperlukan
+      },
     },
   },
 });
